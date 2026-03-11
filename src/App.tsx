@@ -870,6 +870,588 @@ Bresenham uses → integer arithmetic
       `
     },
     {
+      id: 11,
+      question: "11. Explain Scan Line Polygon Fill Algorithm with steps and diagram.  Must write: Steps of algorithm, Intersection points, Filling pairs of pixels",
+      answer: "📌 Very common exam question.",
+      codeExample: `
+⭐ What is a Polygon?
+✅ Simple Meaning
+
+A polygon is a closed shape made using straight lines.
+The lines connect to form a closed figure.
+
+
+Examples
+
+Triangle (3 sides)
+
+   /\\
+  /  \\
+ /____\\
+
+ Rectangle (4 sides)
+ _______
+|       |
+|       |
+|_______|
+
+Pentagon (5 sides)
+
+   /\\
+  /  \\
+ /    \\
+|      |
+ \\____/
+
+
+👉 In computer graphics, polygons are used to draw shapes like:
+
+triangle
+rectangle
+square
+pentagon
+hexagon
+      
+
+-------------------------------------
+
+
+⭐ What is Polygon Filling?
+
+Sometimes we want to color the inside of the shape.
+
+Example:
+
+Before filling
+
+ _______
+|       |
+|       |
+|_______|
+
+
+After filling
+ _______
+|#######|
+|#######|
+|#######|
+
+The algorithm fills the inside pixels.
+
+
+-------------------------------------
+
+
+⭐ Scan Line Polygon Fill (Very Simple Idea)
+
+Imagine a horizontal line moving from top to bottom.
+
+Polygon
+
+   /\\ 
+  /  \\
+ /____\\
+
+Scan line →
+
+--------
+
+The scan line cuts the polygon edges.
+Where it cuts is called intersection points.
+
+
+⭐ Example
+
+Scan line
+
+--------x1------x2--------
+
+x1 = first intersection
+x2 = second intersection
+
+Pixels between them are filled.
+
+--------######--------
+      
+
+-------------------------------------
+
+
+⭐ If There Are 4 Intersections
+
+--------x1---x2---x3---x4--------
+
+Fill in pairs:
+
+Fill x1 → x2
+Skip x2 → x3
+Fill x3 → x4
+
+Result:
+
+----#####----#####----
+
+
+-------------------------------------
+
+
+⭐ Simple Steps
+
+1️⃣ Draw horizontal scan line
+2️⃣ Find where it touches polygon edges
+3️⃣ These points are intersection points
+4️⃣ Fill pixels between pairs
+
+
+
+⭐ Very Easy Example
+Polygon
+
+     /\\
+    /  \\
+---/----\\---
+   \\    /
+    \\__/
+
+Scan line touches edges at:
+
+x1        x2
+
+Fill:
+
+###########
+
+
+⭐ One Line Definition (Exam)
+
+A polygon is a closed shape made of straight lines, and the scan line algorithm fills the inside of the 
+polygon using horizontal scanning lines.
+
+
+final output like this:
+
+        /\\
+       /  \\
+      /    \\
+   x1/######\\x2
+    /        \\
+   /          \\
+  /____________\\
+
+`
+    },
+    {
+      id: 12,
+      question: "12. Explain Flood Fill Algorithm with algorithm and advantages/disadvantages.  Include: 4-connected method, 8-connected method, Algorithm steps",
+      answer: "📌 Frequently asked question.",
+      codeExample: `
+Flood Fill Algorithm
+
+The Flood Fill Algorithm works by starting from a seed pixel and spreading to neighboring pixels that have 
+the same target color until the boundary is reached.
+
+Basic Idea
+
+1. Start from a seed point (x, y).
+2. Check if the pixel has the target color.
+3. Change it to the replacement color.
+4. Repeat the process for neighboring pixels.
+5. Stop when pixels are different from the target color or already filled.
+      
+
+Types of Connectivity
+
+Flood fill can be implemented using two connectivity methods.
+
+
+1. 4-Connected Method
+
+In the 4-connected method, a pixel is connected to four neighbors:
+
+Left (x−1, y)
+Right (x+1, y)
+Up (x, y−1)
+Down (x, y+1)
+
+
+Diagram
+
+       (x,y-1)
+          |
+(x-1,y) (x,y) (x+1,y)
+          |
+       (x,y+1)
+
+
+Characteristics
+
+  Checks only horizontal and vertical neighbors.
+  Diagonal pixels are not considered connected.
+
+
+Algorithm (4-Connected Flood Fill):
+
+FloodFill4(x, y, targetColor, replacementColor)
+
+1. If pixel(x, y) ≠ targetColor
+       return
+
+2. Set pixel(x, y) = replacementColor
+
+3. FloodFill4(x+1, y, targetColor, replacementColor)
+4. FloodFill4(x-1, y, targetColor, replacementColor)
+5. FloodFill4(x, y+1, targetColor, replacementColor)
+6. FloodFill4(x, y-1, targetColor, replacementColor)
+      
+
+-----------------------------------
+
+2. 8-Connected Method
+
+In the 8-connected method, a pixel is connected to eight neighbors, including diagonals.
+
+Neighbors:
+
+Left (x−1, y)
+Right (x+1, y)
+Up (x, y−1)
+Down (x, y+1)
+Top-left (x−1, y−1)
+Top-right (x+1, y−1)
+Bottom-left (x−1, y+1)
+Bottom-right (x+1, y+1)
+
+
+Diagram
+
+(x-1,y-1) (x,y-1) (x+1,y-1)
+(x-1,y)   (x,y)   (x+1,y)
+(x-1,y+1) (x,y+1) (x+1,y+1)
+
+
+Characteristics
+
+  Includes diagonal connectivity.
+  Covers more pixels faster than the 4-connected method.
+
+
+Algorithm (8-Connected Flood Fill):
+
+FloodFill8(x, y, targetColor, replacementColor)
+
+1. If pixel(x, y) ≠ targetColor
+       return
+
+2. Set pixel(x, y) = replacementColor
+
+3. FloodFill8(x+1, y, targetColor, replacementColor)
+4. FloodFill8(x-1, y, targetColor, replacementColor)
+5. FloodFill8(x, y+1, targetColor, replacementColor)
+6. FloodFill8(x, y-1, targetColor, replacementColor)
+
+7. FloodFill8(x+1, y+1, targetColor, replacementColor)
+8. FloodFill8(x-1, y-1, targetColor, replacementColor)
+9. FloodFill8(x+1, y-1, targetColor, replacementColor)
+10. FloodFill8(x-1, y+1, targetColor, replacementColor)
+
+
+Advantages of Flood Fill Algorithm
+
+Simple to understand and implement.
+Efficient for filling large connected areas.
+Used in graphics editors and image processing applications.
+Works well for region filling in computer graphics.
+
+
+Disadvantages of Flood Fill Algorithm
+
+High memory usage when recursion is deep.
+Stack overflow risk for large images with recursive implementation.
+Slow for very large regions because many pixels are checked.
+Sometimes leaks outside boundaries if the region is not perfectly closed.
+
+
+✅ Summary
+
+| Method      | Connectivity                     | Neighbor Count |
+| ----------- | -------------------------------- | -------------- |
+| 4-connected | Horizontal + Vertical            | 4              |
+| 8-connected | Horizontal + Vertical + Diagonal | 8              |
+
+`
+    },
+    {
+      id: 13,
+      question: "13. Explain Boundary Fill Algorithm with 4-connected and 8-connected method.  Write: Definition, Steps, Example",
+      answer: "📌 Important for theory + algorithm",
+      codeExample: `
+Boundary Fill Algorithm
+Definition
+
+The Boundary Fill Algorithm is a computer graphics algorithm used to fill a region with a specified color 
+starting from a seed point until a boundary color is reached.
+
+The algorithm stops filling when it encounters the boundary color of the region.
+
+It is commonly used in paint and drawing applications to color enclosed shapes.
+
+
+Working Principle
+
+1. A seed point inside the region is selected.
+2. The algorithm checks the color of the pixel.
+3. If the pixel is not the boundary color and not already filled, it fills the pixel.
+4. The algorithm then repeats the process for neighboring pixels.
+5. The process continues until the boundary color is encountered.
+
+
+--------------------------------------
+
+
+4-Connected Boundary Fill Method
+
+In the 4-connected method, the algorithm checks four neighboring pixels:
+
+Left (x−1, y)
+Right (x+1, y)
+Up (x, y−1)
+Down (x, y+1)
+
+
+Steps (Algorithm):
+
+BoundaryFill4(x, y, fillColor, boundaryColor)
+
+1. If pixel(x, y) is not boundaryColor 
+   and pixel(x, y) is not fillColor then
+
+2. Set pixel(x, y) = fillColor
+
+3. Call BoundaryFill4(x+1, y, fillColor, boundaryColor)
+4. Call BoundaryFill4(x-1, y, fillColor, boundaryColor)
+5. Call BoundaryFill4(x, y+1, fillColor, boundaryColor)
+6. Call BoundaryFill4(x, y-1, fillColor, boundaryColor)
+
+
+Neighbor Structure
+
+       (x,y-1)
+          |
+(x-1,y) (x,y) (x+1,y)
+          |
+       (x,y+1)
+
+
+   
+8-Connected Boundary Fill Method
+
+In the 8-connected method, the algorithm checks eight neighboring pixels including diagonals.
+
+Neighbors:
+
+Left (x−1, y)
+Right (x+1, y)
+Up (x, y−1)
+Down (x, y+1)
+Top-left (x−1, y−1)
+Top-right (x+1, y−1)
+Bottom-left (x−1, y+1)
+Bottom-right (x+1, y+1)
+
+
+Steps (Algorithm):
+
+BoundaryFill8(x, y, fillColor, boundaryColor)
+
+1. If pixel(x, y) is not boundaryColor 
+   and pixel(x, y) is not fillColor then
+
+2. Set pixel(x, y) = fillColor
+
+3. BoundaryFill8(x+1, y, fillColor, boundaryColor)
+4. BoundaryFill8(x-1, y, fillColor, boundaryColor)
+5. BoundaryFill8(x, y+1, fillColor, boundaryColor)
+6. BoundaryFill8(x, y-1, fillColor, boundaryColor)
+
+7. BoundaryFill8(x+1, y+1, fillColor, boundaryColor)
+8. BoundaryFill8(x-1, y-1, fillColor, boundaryColor)
+9. BoundaryFill8(x+1, y-1, fillColor, boundaryColor)
+10. BoundaryFill8(x-1, y+1, fillColor, boundaryColor)
+
+
+Neighbor Structure
+
+(x-1,y-1) (x,y-1) (x+1,y-1)
+(x-1,y)   (x,y)   (x+1,y)
+(x-1,y+1) (x,y+1) (x+1,y+1)
+
+
+Example
+
+Suppose we have a circle drawn with a black boundary and the inside is white.
+
+  Boundary color = Black
+  Fill color = Blue
+  Seed point = Any pixel inside the circle
+
+Steps:
+
+1. Select a pixel inside the circle.
+2. Check whether it is boundary color.
+3. Fill it with blue.
+4. Repeat for neighboring pixels.
+5. Stop when black boundary pixels are reached.
+
+Result:
+The entire region inside the circle becomes blue while the boundary remains black.
+
+
+✅ Summary
+
+| Method      | Neighbors Checked | Description                                      |
+| ----------- | ----------------- | ------------------------------------------------ |
+| 4-Connected | 4                 | Checks only horizontal and vertical pixels       |
+| 8-Connected | 8                 | Checks horizontal, vertical, and diagonal pixels |
+
+      `
+    },
+    {
+      id: 14,
+      question: "14. Difference Between Flood Fill and Boundary Fill",
+      answer: "",
+      codeExample: `
+1️⃣ Flood Fill Algorithm
+
+Flood Fill looks at the color inside the shape.
+
+Example:
+
+Before fill
+
+########
+#      #
+#      #
+#      #
+########
+
+Inside color = white
+
+
+If you click inside with red, it fills all white pixels.
+
+########
+#RRRRRR#
+#RRRRRR#
+#RRRRRR#
+########
+
+👉 It fills all connected pixels of the same color.
+
+
+2️⃣ Boundary Fill Algorithm
+
+Boundary Fill looks at the border color.
+
+Example:
+
+Boundary color = #
+
+########
+#      #
+#      #
+#      #
+########
+
+
+When filling starts:
+
+It keeps filling until it touches # (boundary).
+It stops at the border.
+
+      
+Easy Trick to Remember
+
+🟢 Flood Fill → checks INSIDE color
+🔵 Boundary Fill → checks BORDER color
+
+
+
+1️⃣ Flood Fill Algorithm
+
+Idea: Fill all connected pixels having the same interior color.
+
+Algorithm
+
+1. Start with a seed point (x, y) inside the region.
+2. Check the color of the pixel.
+3. If the pixel color = old color, change it to new color.
+4. Repeat the process for neighbor pixels:
+
+    (x+1, y)
+    (x-1, y)
+    (x, y+1)
+    (x, y-1)
+
+5. Continue until all connected pixels of the old color are filled.
+
+
+Short Definition (Exam)
+
+Flood Fill: A filling algorithm that replaces all connected pixels of the same interior color starting from a 
+seed point.
+
+
+
+2️⃣ Boundary Fill Algorithm
+
+Idea: Fill the region until the boundary color is reached.
+
+Algorithm
+
+1. Start with a seed point (x, y) inside the region.
+2. Check the pixel color.
+3. If pixel color ≠ boundary color and ≠ fill color, then:
+    Change it to fill color.
+4. Repeat for neighboring pixels:
+
+(x+1, y)
+(x-1, y)
+(x, y+1)
+(x, y-1)
+
+5. Stop when boundary color is reached.
+
+
+
+Short Definition (Exam)
+
+Boundary Fill: A filling algorithm that fills a region until a specified boundary color is encountered.
+
+
+3️⃣ Difference Between Flood Fill and Boundary Fill
+
+| Flood Fill Algorithm                | Boundary Fill Algorithm              |
+| ------------------------------------| -------------------------------------|
+| Uses interior color                 | Uses boundary color                  |
+| Replaces pixels of the same color   | Stops when boundary color is reached |
+| Works when region has uniform color | Works when region has clear border   |
+| Does not need boundary color        | Requires boundary color              |
+
+`
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
       id: 1,
       question: "1. ",
       answer: "",
@@ -892,6 +1474,796 @@ Bresenham uses → integer arithmetic
       question: "1. ",
       answer: "",
       codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1.1,
+      question: "1. DDA Line Drawing Algorithm",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <math.h>
+
+void drawDDA(int x1, int y1, int x2, int y2) {
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    float steps = (fabs(dx) > fabs(dy)) ? fabs(dx) : fabs(dy);
+
+    float Xinc = dx / steps;
+    float Yinc = dy / steps;
+
+    float x = x1;
+    float y = y1;
+
+    glBegin(GL_POINTS);
+    for (int i = 0; i <= (int)steps; i++) {
+        glVertex2i(round(x), round(y));
+        x += Xinc;
+        y += Yinc;
+    }
+    glEnd();
+    glFlush();
+}
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    // Draw a line from (50, 100) to (300, 250)
+    drawDDA(50, 100, 300, 250);
+}
+
+void init() {
+    glClearColor(0.0, 0.0, 0.0, 1.0); // Set background color to black
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(0, 500, 0, 500); // Set coordinate system
+}
+
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow("DDA Line Drawing Algorithm");
+
+    init();
+    glutDisplayFunc(display);
+    glutMainLoop();
+
+    return 0;
+}
+
+      
+      `
+    },
+    {
+      id: 2.2,
+      question: "2. Bresenham's Line Drawing Algorithm",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <stdlib.h>
+
+/* Bresenham Line Drawing Algorithm */
+void drawLine(int x0, int y0, int x1, int y1) {
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int p = 2 * dy - dx; // Initial decision parameter P0 = 2Δy - Δx
+    int x = x0;
+    int y = y0;
+
+    glBegin(GL_POINTS);
+    // Step 2: Plot the first point
+    glVertex2i(x, y);
+
+    // Step 5: Repeat Δx times
+    for (int k = 0; k < dx; k++) {
+        if (p < 0) {
+            // Decision: Choose East pixel
+            x = x + 1;
+            p = p + 2 * dy;
+        } else {
+            // Decision: Choose North-East pixel
+            x = x + 1;
+            y = y + 1;
+            p = p + 2 * dy - 2 * dx;
+        }
+        glVertex2i(x, y); // Plot next point
+    }
+    glEnd();
+}
+
+/* Display callback */
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1.0, 0.0, 0.0); // Set line color to Red
+
+    // Example: Line from (50, 100) to (300, 250)
+    drawLine(50, 100, 300, 250);
+    glFlush();
+}
+
+/* Initialize OpenGL */
+void init() {
+    glClearColor(1.0, 1.0, 1.0, 1.0); // White background
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0, 500, 0, 500); // 2D coordinate system setup
+}
+
+/* Main function */
+int main(int argc, char **argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow("Bresenham Line Drawing Algorithm");
+
+    init();
+    glutDisplayFunc(display);
+    glutMainLoop();
+
+    return 0;
+}
+
+
+
+      
+      `
+    },
+    {
+      id: 3.3,
+      question: "3. Draw a circle using the Midpoint Circle Algorithm.",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <stdio.h>
+
+// Circle center and radius
+int xc = 0, yc = 0, r;
+
+/* Function to plot 8 symmetric points of the circle */
+void plotPoints(int x, int y) {
+    glBegin(GL_POINTS);
+    glVertex2i(xc + x, yc + y);
+    glVertex2i(xc - x, yc + y);
+    glVertex2i(xc + x, yc - y);
+    glVertex2i(xc - x, yc - y);
+    glVertex2i(xc + y, yc + x);
+    glVertex2i(xc - y, yc + x);
+    glVertex2i(xc + y, yc - x);
+    glVertex2i(xc - y, yc - x);
+    glEnd();
+}
+
+/* Midpoint Circle Algorithm */
+void drawCircle() {
+    int x = 0;
+    int y = r;
+    int p = 1 - r; // Initial decision parameter
+
+    plotPoints(x, y);
+
+    while (x < y) {
+        x++;
+        if (p < 0) {
+            p = p + 2 * x + 1;
+        } else {
+            y--;
+            p = p + 2 * (x - y) + 1;
+        }
+        plotPoints(x, y);
+    }
+}
+
+/* Display function */
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1.0, 0.0, 0.0); // Red color for the circle
+    glPointSize(2.0);         // Makes the line thicker
+
+    drawCircle();
+    glFlush();
+}
+
+/* Initialize OpenGL settings */
+void init() {
+    glClearColor(1.0, 1.0, 1.0, 1.0); // White background
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(-200, 200, -200, 200); // 2D coordinate system centered at (0,0)
+}
+
+/* Main function */
+int main(int argc, char** argv) {
+    printf("Enter radius: ");
+    if (scanf("%d", &r) != 1) return 1;
+
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow("Midpoint Circle Algorithm");
+
+    init();
+    glutDisplayFunc(display);
+    glutMainLoop();
+
+    return 0;
+}
+
+
+      `
+    },
+    {
+      id: 4.4,
+      question: "4. Implement Bresenham’s circle drawing algorithm to generate a circle.",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <stdio.h>
+
+int radius;
+
+/* Function to plot 8-way symmetric points */
+void plotCirclePoints(int xc, int yc, int x, int y) {
+    glBegin(GL_POINTS);
+    glVertex2i(xc + x, yc + y);
+    glVertex2i(xc - x, yc + y);
+    glVertex2i(xc + x, yc - y);
+    glVertex2i(xc - x, yc - y);
+    glVertex2i(xc + y, yc + x);
+    glVertex2i(xc - y, yc + x);
+    glVertex2i(xc + y, yc - x);
+    glVertex2i(xc - y, yc - x);
+    glEnd();
+}
+
+/* Bresenham's Circle Drawing Algorithm */
+void drawCircle(int xc, int yc, int r) {
+    int x = 0;
+    int y = r;
+    int d = 3 - 2 * r; // Initial decision parameter
+
+    plotCirclePoints(xc, yc, x, y);
+
+    while (x <= y) {
+        x++;
+        if (d < 0) {
+            d = d + 4 * x + 6;
+        } else {
+            y--;
+            d = d + 4 * (x - y) + 10;
+        }
+        plotCirclePoints(xc, yc, x, y);
+    }
+}
+
+/* Display Function */
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1.0, 0.0, 0.0); // Red color for the circle
+    glPointSize(2.0);
+
+    drawCircle(0, 0, radius); // Draw circle at origin (0,0)
+    glFlush();
+}
+
+/* Initialization */
+void init() {
+    glClearColor(0.0, 0.0, 0.0, 1.0); // Black background
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-200, 200, -200, 200); // Set coordinate system
+}
+
+/* Main Function */
+int main(int argc, char** argv) {
+    printf("Enter the radius of the circle: ");
+    if (scanf("%d", &radius) != 1) return 1;
+
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow("Bresenham Circle Drawing Algorithm");
+
+    init();
+    glutDisplayFunc(display);
+    glutMainLoop();
+
+    return 0;
+}
+
+      
+      `
+    },
+    {
+      id: 5.5,
+      question: "5. Draw an ellipse using the Midpoint Ellipse Algorithm.",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <stdio.h>
+#include <math.h>
+
+int rx, ry, xc = 0, yc = 0;
+
+/* Function to plot 4 symmetric points of the ellipse */
+void plotPoints(int x, int y) {
+    glBegin(GL_POINTS);
+    glVertex2i(xc + x, yc + y);
+    glVertex2i(xc - x, yc + y);
+    glVertex2i(xc + x, yc - y);
+    glVertex2i(xc - x, yc - y);
+    glEnd();
+}
+
+/* Midpoint Ellipse Algorithm */
+void midpointEllipse() {
+    float dx, dy, d1, d2, x, y;
+    x = 0;
+    y = ry;
+
+    // Initial decision parameter for Region 1
+    d1 = (ry * ry) - (rx * rx * ry) + (0.25 * rx * rx);
+    dx = 2 * ry * ry * x;
+    dy = 2 * rx * rx * y;
+
+    // -------- Region 1 --------
+    while (dx < dy) {
+        plotPoints(x, y);
+        if (d1 < 0) {
+            x++;
+            dx = dx + (2 * ry * ry);
+            d1 = d1 + dx + (ry * ry);
+        } else {
+            x++;
+            y--;
+            dx = dx + (2 * ry * ry);
+            dy = dy - (2 * rx * rx);
+            d1 = d1 + dx - dy + (ry * ry);
+        }
+    }
+
+    // Initial decision parameter for Region 2
+    d2 = ((ry * ry) * ((x + 0.5) * (x + 0.5))) +
+         ((rx * rx) * ((y - 1) * (y - 1))) -
+         (rx * rx * ry * ry);
+
+    // -------- Region 2 --------
+    while (y >= 0) {
+        plotPoints(x, y);
+        if (d2 > 0) {
+            y--;
+            dy = dy - (2 * rx * rx);
+            d2 = d2 + (rx * rx) - dy;
+        } else {
+            y--;
+            x++;
+            dx = dx + (2 * ry * ry);
+            dy = dy - (2 * rx * rx);
+            d2 = d2 + dx - dy + (rx * rx);
+        }
+    }
+}
+
+/* Display function */
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1.0, 1.0, 1.0); // White ellipse
+    midpointEllipse();
+    glFlush();
+}
+
+/* Initialization */
+void init() {
+    glClearColor(0.0, 0.0, 0.0, 1.0); // Black background
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-500, 500, -500, 500); // 2D coordinate system
+}
+
+/* Main function */
+int main(int argc, char** argv) {
+    printf("Enter rx: ");
+    if (scanf("%d", &rx) != 1) return 1;
+    printf("Enter ry: ");
+    if (scanf("%d", &ry) != 1) return 1;
+
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(800, 800);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow("Midpoint Ellipse Algorithm - OpenGL");
+
+    init();
+    glutDisplayFunc(display);
+    glutMainLoop();
+
+    return 0;
+}
+
+      
+      `
+    },
+    {
+      id: 6.6,
+      question: "6. Scan-line",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int x[10], y[10];   // Polygon vertices
+int n = 4;          // Number of vertices
+
+// Function to draw a pixel
+void drawPixel(int px, int py) {
+    glBegin(GL_POINTS);
+    glVertex2i(px, py);
+    glEnd();
+}
+
+// Scan-line filling function
+void scanline() {
+    int i, j, k;
+    int ymin = 500, ymax = 0;
+    int interx[10];
+
+    // Find ymin and ymax of the polygon
+    for (i = 0; i < n; i++) {
+        if (y[i] < ymin) ymin = y[i];
+        if (y[i] > ymax) ymax = y[i];
+    }
+
+    // Move scanline from ymin to ymax
+    for (int scan = ymin; scan <= ymax; scan++) {
+        k = 0; // Reset intersection counter
+
+        // Check each edge for intersection with the current scanline
+        for (i = 0; i < n; i++) {
+            int next = (i + 1) % n;
+
+            // Ignore horizontal edges to avoid division by zero
+            if (y[i] == y[next]) continue;
+
+            // Check if scanline intersects the edge
+            if (scan >= (y[i] < y[next] ? y[i] : y[next]) &&
+                scan < (y[i] > y[next] ? y[i] : y[next])) {
+                
+                // Calculate x-intersection using the line equation
+                interx[k] = x[i] + (float)(scan - y[i]) * (x[next] - x[i]) / (y[next] - y[i]);
+                k++;
+            }
+        }
+
+        // Sort intersection points (simple bubble sort)
+        for (i = 0; i < k - 1; i++) {
+            for (j = i + 1; j < k; j++) {
+                if (interx[i] > interx[j]) {
+                    int temp = interx[i];
+                    interx[i] = interx[j];
+                    interx[j] = temp;
+                }
+            }
+        }
+
+        // Fill pixels between pairs of intersections
+        for (i = 0; i < k; i += 2) {
+            for (j = interx[i]; j <= interx[i + 1]; j++) {
+                drawPixel(j, scan);
+            }
+        }
+    }
+}
+
+// Display function
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1.0, 0.0, 0.0); // Red fill color
+    scanline();
+    glFlush();
+}
+
+// Initialization
+void init() {
+    glClearColor(1.0, 1.0, 1.0, 1.0); // White background
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0, 500, 0, 500); // 2D coordinate system
+}
+
+// Main function
+int main(int argc, char** argv) {
+    // Define polygon vertices
+    x[0] = 100; y[0] = 100;
+    x[1] = 200; y[1] = 300;
+    x[2] = 350; y[2] = 250;
+    x[3] = 300; y[3] = 100;
+
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow("Scan Line Polygon Fill - C");
+
+    init();
+    glutDisplayFunc(display);
+    glutMainLoop();
+
+    return 0;
+}
+
+      `
+    },
+    {
+      id: 7.7,
+      question: "7. boundary-fill",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <stdio.h>
+
+// Global colors
+float boundaryColor[3] = {0.0, 0.0, 0.0}; // Black boundary
+float fillColor[3]     = {1.0, 0.0, 0.0}; // Red fill
+
+// Function to set pixel
+void setPixel(int x, int y) {
+    glColor3fv(fillColor);
+    glBegin(GL_POINTS);
+    glVertex2i(x, y);
+    glEnd();
+    glFlush();
+}
+
+// Function to get pixel color
+void getPixel(int x, int y, float color[3]) {
+    glReadPixels(x, y, 1, 1, GL_RGB, GL_FLOAT, color);
+}
+
+// Boundary Fill Function (4-connected recursion)
+void boundaryFill(int x, int y) {
+    float currentColor[3];
+    getPixel(x, y, currentColor);
+
+    // If current pixel is NOT boundary and NOT already filled
+    if ((currentColor[0] != boundaryColor[0] || currentColor[1] != boundaryColor[1] || currentColor[2] != boundaryColor[2]) &&
+        (currentColor[0] != fillColor[0] || currentColor[1] != fillColor[1] || currentColor[2] != fillColor[2])) {
+        
+        setPixel(x, y);
+
+        // Recursive calls in 4 directions
+        boundaryFill(x + 1, y);
+        boundaryFill(x - 1, y);
+        boundaryFill(x, y + 1);
+        boundaryFill(x, y - 1);
+    }
+}
+
+// Draw the polygon boundary to be filled
+void drawPolygon() {
+    glColor3fv(boundaryColor);
+    glBegin(GL_LINE_LOOP);
+        glVertex2i(150, 150);
+        glVertex2i(350, 150);
+        glVertex2i(350, 350);
+        glVertex2i(150, 350);
+    glEnd();
+    glFlush();
+}
+
+// Mouse function: Filling starts where you click
+void mouse(int button, int state, int x, int y) {
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+        boundaryFill(x, 500 - y); // Invert y for OpenGL coordinates
+    }
+}
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    drawPolygon();
+}
+
+void init() {
+    glClearColor(1.0, 1.0, 1.0, 1.0); // White background
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0, 500, 0, 500);
+}
+
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Boundary Fill Algorithm - C");
+
+    init();
+    glutDisplayFunc(display);
+    glutMouseFunc(mouse);
+    glutMainLoop();
+
+    return 0;
+}
+
+      
+      `
+    },
+    {
+      id: 8.8,
+      question: "8. Flood Fill Algorithm.",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <stdio.h>
+
+float fillColor[] = {1.0, 0.0, 0.0};   // Red
+float oldColor[]  = {1.0, 1.0, 1.0};   // White
+
+// Get pixel color
+void getPixel(int x, int y, float color[3])
+{
+    glReadPixels(x, y, 1, 1, GL_RGB, GL_FLOAT, color);
+}
+
+// Set pixel color
+void setPixel(int x, int y)
+{
+    glColor3fv(fillColor);
+    glBegin(GL_POINTS);
+    glVertex2i(x, y);
+    glEnd();
+    glFlush();
+}
+
+// Flood Fill Function
+void floodFill(int x, int y)
+{
+    float current[3];
+    getPixel(x, y, current);
+
+    if (current[0] == oldColor[0] &&
+        current[1] == oldColor[1] &&
+        current[2] == oldColor[2])
+    {
+        setPixel(x, y);
+
+        floodFill(x + 1, y);
+        floodFill(x - 1, y);
+        floodFill(x, y + 1);
+        floodFill(x, y - 1);
+    }
+}
+
+// Display Function
+void display()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Draw Square
+    glColor3f(0.0, 0.0, 0.0);
+    glBegin(GL_LINE_LOOP);
+        glVertex2i(200, 200);
+        glVertex2i(400, 200);
+        glVertex2i(400, 400);
+        glVertex2i(200, 400);
+    glEnd();
+
+    // Start Flood Fill from inside point
+    floodFill(300, 300);
+
+    glFlush();
+}
+
+// Initialization
+void init()
+{
+    glClearColor(1.0, 1.0, 1.0, 1.0); // White background
+    gluOrtho2D(0, 500, 0, 500);
+}
+
+// Main
+int main(int argc, char** argv)
+{
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Simple Flood Fill");
+
+    init();
+    glutDisplayFunc(display);
+
+    glutMainLoop();
+    return 0;
+}
+      `
+    },
+    {
+      id: 9.9,
+      question: "9. Transformation",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <stdio.h>
+
+int tx = 100, ty = 50;   // Translation values
+
+// Original rectangle coordinates
+int x1 = 100, y1 = 100;
+int x2 = 200, y2 = 200;
+
+// Function to draw rectangle
+void drawRectangle(int x1, int y1, int x2, int y2)
+{
+    glBegin(GL_LINE_LOOP);
+        glVertex2i(x1, y1);
+        glVertex2i(x2, y1);
+        glVertex2i(x2, y2);
+        glVertex2i(x1, y2);
+    glEnd();
+}
+
+// Display function
+void display()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Original Rectangle (Black)
+    glColor3f(0.0, 0.0, 0.0);
+    drawRectangle(x1, y1, x2, y2);
+
+    // Translated Rectangle (Red)
+    glColor3f(1.0, 0.0, 0.0);
+    drawRectangle(x1 + tx, y1 + ty, x2 + tx, y2 + ty);
+
+    glFlush();
+}
+
+// Initialization
+void init()
+{
+    glClearColor(1.0, 1.0, 1.0, 1.0);
+    gluOrtho2D(0, 500, 0, 500);
+}
+
+// Main function
+int main(int argc, char** argv)
+{
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("2D Translation");
+
+    init();
+    glutDisplayFunc(display);
+
+    glutMainLoop();
+    return 0;
+}
+
+      `
     },
     {
       id: 1,
