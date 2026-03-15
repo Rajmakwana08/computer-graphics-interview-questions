@@ -2105,6 +2105,1474 @@ Character generation methods
       `
     },
     {
+      id: 21,
+      question: "21. Explain Window and Viewport with diagram.",
+      answer: "📌 Very common theory question.",
+      codeExample: `
+1️⃣ What is a Window?
+
+A Window is the area of the scene we choose to see.
+Imagine a large picture, but you look at only one small part.
+That selected part is called Window.
+
+Example
+
+Think of a map of India, but you only want to see Gujarat.
+The selected part (Gujarat) = Window
+
+Diagram
+
+Whole Scene (World Coordinate)
+
++-----------------------------+
+|                             |
+|       +-----------+         |
+|       |  WINDOW   |         |
+|       | (selected |         |
+|       |   area)   |         |
+|       +-----------+         |
+|                             |
++-----------------------------+
+
+The small box is the Window.
+
+
+
+2️⃣ What is a Viewport?
+
+A Viewport is the area on the screen where the window is displayed.
+
+So:
+
+Window → what part of scene we select
+Viewport → where it appears on screen
+
+Diagram
+Screen (Display Device)
+
++-----------------------------+
+|                             |
+|      +-----------+          |
+|      | VIEWPORT  |          |
+|      | (display  |          |
+|      |   area)   |          |
+|      +-----------+          |
+|                             |
++-----------------------------+
+
+The selected window is shown inside this viewport.
+
+
+
+3️⃣ Relationship (Very Important)
+
+Process:
+
+World Scene
+     ↓
+Select Window
+     ↓
+Map it to Viewport
+     ↓
+Display on Screen
+
+So the window content is mapped to the viewport.
+
+
+4️⃣ Simple Real-Life Example
+
+Imagine:
+
+📷 Camera
+
+Camera frame = Window
+Phone screen where photo appears = Viewport
+
+
+
+5️⃣ Difference Between Window and Viewport
+
+| Window                              | Viewport                         |
+| ----------------------------------- | -------------------------------- |
+| Area selected from the world scene  | Area on the display screen       |
+| Defined in world coordinates        | Defined in screen coordinates    |
+| Shows what part of scene to display | Shows where it appears on screen |
+| Exists in virtual world             | Exists on display device         |
+
+
+
+6️⃣ Very Short Exam Definition
+
+Window:
+A window is the selected area of the world coordinate system that we want to display.
+
+Viewport:
+A viewport is the area of the display device where the window is mapped.
+
+      `
+    },
+    {
+      id: 22,
+      question: "22. Explain Viewing Transformation Pipeline.",
+      answer: "📌 Important long answer.",
+      codeExample: `
+In Computer Graphics, objects are created in a big virtual world, but the computer must convert them 
+step-by-step to screen pixels.
+
+This process is called Viewing Transformation Pipeline.
+
+
+
+Viewing Transformation Pipeline
+
+It is the process of converting object coordinates from world space to screen display coordinates.
+
+Simple flow:
+
+World Coordinates
+       ↓
+Viewing Coordinates
+       ↓
+Normalized Coordinates
+       ↓
+Device Coordinates (Screen)
+
+
+
+1️⃣ World Coordinate System (WCS)
+
+This is the original coordinate system where objects are created.
+All objects exist in a large virtual world.
+
+Example coordinates:
+
+A (10 , 20)
+B (30 , 40)
+C (50 , 60)
+
+
+Diagram idea:
+
+World Coordinate System
+
+      Y
+      |
+      |        *
+      |    *
+      |
+------|---------------- X
+      |
+      |           *
+
+So WCS = complete scene or world space.
+
+
+
+2️⃣ Viewing Coordinate System (VCS)
+
+Now we choose which part of the world we want to see.
+This is done by placing a camera or viewing position.
+It converts world coordinates → viewer coordinates.
+Think of it like placing a camera in the world.
+
+Example:
+
+    Camera sees only selected objects
+
+
+
+3️⃣ Normalized Viewing Coordinates (NVC)
+
+Now the selected area is scaled into a standard range.
+
+Usually the range is:
+
+    0 to 1
+
+So all coordinates become normalized.
+
+Example:
+
+    Original range → 0 to 1 range
+
+Example conversion:
+
+    (20 , 40)  →  (0.4 , 0.6)
+
+This makes calculations easier for the system.
+
+
+
+4️⃣ Device Coordinates (DC)
+
+Finally the normalized coordinates are converted into screen pixels.
+
+Example screen resolution:
+
+    800 × 600 pixels
+
+Example:
+
+    (0.4 , 0.6) → (320 , 360)
+
+Now the point can be drawn on the monitor.
+
+
+
+Complete Viewing Pipeline Diagram
+You can draw this in the exam:
+
+World Coordinate System
+          ↓
+Viewing Transformation
+          ↓
+Viewing Coordinate System
+          ↓
+Normalization
+          ↓
+Normalized Viewing Coordinates
+          ↓
+Device Mapping
+          ↓
+Device Coordinates (Screen)
+
+
+
+Very Short Table (for quick revision)
+
+| Stage                  | Meaning                            |
+| ---------------------- | ---------------------------------- |
+| WCS                    | Objects in virtual world           |
+| Viewing Coordinates    | Scene relative to camera           |
+| Normalized Coordinates | Coordinates scaled between 0 and 1 |
+| Device Coordinates     | Final screen pixels                |
+
+      `
+    },
+    {
+      id: 23,
+      question: "23. Explain Window to Viewport Transformation.",
+      answer: "📌 Sometimes asked with formula explanation.",
+      codeExample: `
+Window to Viewport Transformation
+
+It is the process of converting coordinates from the window to the viewport so that the selected scene 
+appears correctly on the screen.
+
+
+Simple meaning:
+
+Selected scene (Window)
+        ↓
+Mapped to
+        ↓
+Screen area (Viewport)
+
+
+
+Diagram (Very Important for Exam)
+World Coordinate System
+
++----------------------------+
+|                            |
+|        +----------+        |
+|        | Window   |        |
+|        |   *      |        |
+|        +----------+        |
+|                            |
++----------------------------+
+
+
+Screen (Display Device)
+
++----------------------------+
+|                            |
+|        +----------+        |
+|        | Viewport |        |
+|        |   *      |        |
+|        +----------+        |
+|                            |
++----------------------------+
+
+The object inside the window appears inside the viewport.
+
+
+
+1️⃣ Scaling Transformation
+
+The size of the window and viewport may be different, so we must scale the object.
+
+Example:
+
+Window size  = 100 × 100
+Viewport size = 500 × 500
+
+So the object becomes larger.
+
+Scaling formulas:
+
+Sx = Viewport Width / Window Width
+Sy = Viewport Height / Window Height
+
+Meaning:
+
+Sx → horizontal scaling
+Sy → vertical scaling
+
+This resizes the object to fit inside the viewport.
+
+
+
+2️⃣ Translation
+
+After scaling, the object must be moved to the correct viewport position.
+So we apply translation.
+
+Example:
+
+Move object to viewport starting position
+Translation moves the coordinates so they align with the viewport location.
+
+
+
+3️⃣ Maintaining Relative Position
+
+This means:
+
+Objects inside the window keep their same relative positions after mapping.
+
+Example:
+
+Window
+
+A        B
+   C
+
+
+After transformation:
+
+Viewport
+
+A        B
+   C
+
+The distance ratio between objects stays the same.
+
+Only size and position change, not the layout.
+Complete Transformation Idea
+
+
+
+The process is:
+
+1. Select Window
+2. Scale objects to match viewport size
+3. Translate to viewport position
+4. Maintain relative position
+
+
+Simple Table (for exam writing)
+
+| Step              | Purpose                          |
+| ----------------- | -------------------------------- |
+| Scaling           | Adjust size to fit viewport      |
+| Translation       | Move object to viewport position |
+| Relative Position | Maintain object layout           |
+
+
+
+One Line Exam Definition
+
+Window to Viewport Transformation is the prceoss of mapping coordinates from the window to the 
+viewport using scaling and translation while maintaining atirelve positions.
+      
+
+------------------------------------------------------------------------
+
+
+Example: Window → Viewport Transformation
+
+Given
+
+Window coordinates
+
+xwmin = 10
+ywmin = 20
+xwmax = 60
+ywmax = 70
+
+
+Viewport coordinates
+
+xvmin = 100
+yvmin = 200
+xvmax = 300
+yvmax = 400
+
+
+Point inside window
+
+P (20 , 40)
+
+We want to find the viewport point (xv , yv).
+
+
+
+Step 1️⃣ Find Window Size
+
+Window width
+
+= xwmax − xwmin
+= 60 − 10
+= 50
+
+Window height
+
+= ywmax − ywmin
+= 70 − 20
+= 50
+
+
+Step 2️⃣ Find Viewport Size
+
+Viewport width
+
+= xvmax − xvmin
+= 300 − 100
+= 200
+
+Viewport height
+
+= yvmax − yvmin
+= 400 − 200
+= 200
+
+
+
+Step 3️⃣ Scaling Factors
+
+Sx = (xvmax − xvmin) / (xwmax − xwmin)
+Sy = (yvmax − yvmin) / (ywmax − ywmin)
+
+Calculate:
+
+Sx = 200 / 50 = 4
+Sy = 200 / 50 = 4
+
+
+
+Step 4️⃣ Transformation Formula
+
+Viewport coordinates:
+
+xv = xvmin + (xw − xwmin) Sx
+yv = yvmin + (yw − ywmin) Sy
+
+
+
+Step 5️⃣ Substitute Values
+
+X coordinate
+
+xv = 100 + (20 − 10) × 4
+xv = 100 + 10 × 4
+xv = 100 + 40
+xv = 140
+
+
+Y coordinate
+
+yv = 200 + (40 − 20) × 4
+yv = 200 + 20 × 4
+yv = 200 + 80
+yv = 280
+
+
+Final Answer
+
+Window Point  : (20 , 40)
+Viewport Point: (140 , 280)
+
+So the point moves from window to viewport.
+
+
+
+Short Exam Format (You Can Copy)
+
+Sx = (xvmax − xvmin) / (xwmax − xwmin)
+Sy = (yvmax − yvmin) / (ywmax − ywmin)
+
+xv = xvmin + (xw − xwmin) Sx
+yv = yvmin + (yw − ywmin) Sy
+
+      `
+    },
+    {
+      id: 24,
+      question: "24. What is Clipping? Explain its types.",
+      answer: "📌 Basic important question.",
+      codeExample: `
+1️⃣ First idea: What problem does clipping solve?
+
+Imagine a window (visible area) on the screen.
+
++-------------+
+|             |
+|   Visible   |
+|    Area     |
+|             |
++-------------+
+
+
+Some objects may be:
+
+    inside the window
+    outside the window
+    partly inside
+
+The computer should display only the part inside the window.
+That process is called Clipping.
+
+
+Simple Definition
+
+Clipping is the process of removing the parts of objects that lie outside the viewing window.
+
+Types:
+
+Point Clipping
+Line Clipping
+Polygon Clipping
+Curve Clipping
+Text Clipping
+
+
+Types of Clipping
+
+1️⃣ Point Clipping
+
+This checks whether a point lies inside the window or outside.
+
+Window boundaries:
+
+xmin ≤ x ≤ xmax
+ymin ≤ y ≤ ymax
+
+Example:
+
+Window
+
++---------+
+|         |
+|   •A    |
+|         |
++---------+
+
+Point A is inside → it will be displayed.
+If a point is outside → it will not be displayed.
+
+
+
+2️⃣ Line Clipping
+
+Sometimes a line crosses the window boundary.
+
+Example:
+
+Line before clipping
+
+      /
+     /
++---------+
+|        /|
+|       / |
+|      /  |
++-----/---+
+
+After clipping:
+
++---------+
+|        /|
+|       / |
+|      /  |
++---------+
+
+Only the part of line inside the window is shown.
+
+
+
+3️⃣ Polygon Clipping
+
+A polygon is a shape with many sides.
+
+Example:
+
+Triangle / Rectangle / Pentagon
+If a polygon crosses the window boundary, the system removes the outside part.
+
+Before clipping
+
+     /\\ 
+    /  \\ 
++--------+
+|   /\\   |
+|  /  \\  |
++--------+
+
+After clipping
+
++--------+
+|   /\\   |
+|  /  \\  |
++--------+
+
+Only the visible part remains.
+
+
+
+4️⃣ Curve Clipping
+
+This is used for curves like circles or arcs.
+
+Example:
+
+Circle before clipping
+
+   ( )
+ +------+
+ |      |
+ |      |
+ +------+
+
+After clipping:
+
+ +------+
+ |  )   |
+ |      |
+ +------+
+
+Only the curve inside the window is shown.
+
+
+
+5️⃣ Text Clipping
+
+This is used when text goes outside the window.
+
+Example:
+
+Before clipping
+
+HELLO WORLD
++------+
+|HELLO |
+|WORLD |
++------+
+
+After clipping:
+
++------+
+|HELLO |
+|WORL  |
++------+
+
+Only the text inside the window is displayed.
+
+
+
+Quick Table (Good for Exam)
+
+| Type             | Meaning                                |
+| ---------------- | -------------------------------------- |
+| Point Clipping   | Checks if a point is inside the window |
+| Line Clipping    | Removes line parts outside window      |
+| Polygon Clipping | Removes outside parts of polygons      |
+| Curve Clipping   | Clips curves like circles              |
+| Text Clipping    | Clips characters outside window        |
+
+      `
+    },
+    {
+      id: 25,
+      question: "25. Explain Cohen–Sutherland Line Clipping Algorithm.",
+      answer: "📌 Most important algorithm in this unit",
+      codeExample: `
+Explain:
+
+Region codes
+9 regions concept
+Inside / outside test
+Logical AND operation
+      
+
+
+Cohen–Sutherland Line Clipping Algorithm
+
+It is a line clipping algorithm used to remove the parts of a line that lie outside the clipping window.
+Only the portion inside the window is displayed.
+
+
+1️⃣ 9 Regions Concept
+
+The window divides the space into 9 regions.
+
+        TOP-LEFT    TOP      TOP-RIGHT
+           1001     1000       1010
+
+        LEFT       WINDOW      RIGHT
+           0001     0000       0010
+
+        BOTTOM-LEFT BOTTOM  BOTTOM-RIGHT
+           0101      0100       0110
+
+Center region 0000 is the window.
+All other regions are outside areas.
+Each region has a 4-bit region code.
+
+
+
+2️⃣ Region Codes
+
+Each point of the line gets a 4-bit binary code.
+
+The bits represent:
+
+TOP
+BOTTOM
+RIGHT
+LEFT
+
+Example format:
+
+TOP  BOTTOM  RIGHT  LEFT
+
+Examples:
+
+| Position        | Code |
+| --------------- | ---- |
+| Inside window   | 0000 |
+| Left of window  | 0001 |
+| Right of window | 0010 |
+| Bottom          | 0100 |
+| Top             | 1000 |
+
+So every point of the line gets a region code.
+
+
+
+3️⃣ Inside Test (Trivial Accept)
+
+If both endpoints have region code 0000
+
+Point1 = 0000
+Point2 = 0000
+
+Then the line is completely inside the window.
+
+Result:
+
+Accept the line (draw it completely)
+
+
+
+4️⃣ Outside Test (Trivial Reject)
+
+If the logical AND of both region codes ≠ 0
+
+Example:
+
+Point1 = 1000
+Point2 = 1000
+
+Logical AND:
+
+1000
+1000
+-----
+1000  (not zero)
+
+This means the line is completely outside the window.
+
+Result:
+
+Reject the line
+
+
+
+5️⃣ Logical AND Operation
+
+The algorithm performs bitwise AND on the region codes.
+
+Example:
+
+Code1 = 1001
+Code2 = 1000
+1001
+1000
+-----
+1000
+
+If result ≠ 0, the line is outside.
+If result = 0, the line may intersect the window and must be clipped.
+
+
+
+6️⃣ Partial Line Case
+
+If:
+
+Code1 ≠ 0000
+Code2 ≠ 0000
+AND result = 0
+
+Then the line crosses the window boundary.
+The algorithm finds the intersection point with the window edge and clips the outside part.
+
+
+Steps of the Algorithm (Exam Format)
+
+1. Assign region codes to both endpoints of the line.
+2. If both codes are 0000, accept the line.
+3. If logical AND of codes ≠ 0, reject the line.
+4. Otherwise, calculate the intersection with window boundary.
+5. Replace the outside point with the intersection point.
+6. Repeat until the line is accepted or rejected.
+
+
+Small Diagram Idea for Exam
+
+          1001 | 1000 | 1010
+        -----------------------
+          0001 | 0000 | 0010
+        -----------------------
+          0101 | 0100 | 0110
+
+Middle region 0000 = clipping window.
+
+
+
+Quick Revision Table
+
+| Concept      | Meaning                         |
+| ------------ | ------------------------------- |
+| Region Code  | 4-bit code for point location   |
+| 9 Regions    | Space divided around window     |
+| Inside Test  | Both codes = 0000               |
+| Outside Test | Logical AND ≠ 0                 |
+| Clipping     | Find intersection and trim line |
+      
+
+
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------
+COHEN–SUTHERLAND LINE CLIPPING EXAMPLE
+-----------------------------------------
+
+Clipping Window:
+
+xmin = 10
+xmax = 50
+ymin = 10
+ymax = 50
+
+
+-----------------------------------------
+LINE ENDPOINTS
+-----------------------------------------
+
+P1 (5 , 20)
+P2 (40 , 60)
+
+We must check if the line is inside or outside
+the clipping window.
+
+
+-----------------------------------------
+STEP 1 : FIND REGION CODES
+-----------------------------------------
+
+Region code format:
+
+TOP  BOTTOM  RIGHT  LEFT
+
+
+For Point P1 (5 , 20)
+
+Check position:
+
+x = 5  < xmin (10)  → LEFT
+y = 20 is inside vertical range
+
+Region code:
+
+0001
+
+
+For Point P2 (40 , 60)
+
+Check position:
+
+x = 40 inside horizontal range
+y = 60 > ymax (50) → TOP
+
+Region code:
+
+1000
+
+
+-----------------------------------------
+STEP 2 : INSIDE TEST
+-----------------------------------------
+
+If both region codes = 0000
+→ line is completely inside.
+
+Here:
+
+P1 = 0001
+P2 = 1000
+
+So the line is NOT completely inside.
+
+
+-----------------------------------------
+STEP 3 : OUTSIDE TEST (LOGICAL AND)
+-----------------------------------------
+
+0001
+1000
+-----
+0000
+
+Result = 0000
+
+So the line is NOT completely outside.
+
+Meaning:
+The line partially intersects the window.
+
+Therefore the line must be clipped.
+
+
+-----------------------------------------
+STEP 4 : FIND INTERSECTION
+-----------------------------------------
+
+We clip the point that is outside.
+
+P1 is LEFT → intersect with left boundary.
+
+Left boundary:
+
+x = xmin = 10
+
+
+Line equation:
+
+y = y1 + (y2 − y1) * (x − x1) / (x2 − x1)
+
+
+Substitute values:
+
+y = 20 + (60 − 20) * (10 − 5) / (40 − 5)
+
+y = 20 + 40 * 5 / 35
+
+y ≈ 20 + 5.7
+
+y ≈ 25.7
+
+
+New point:
+
+P1' (10 , 25.7)
+
+
+-----------------------------------------
+STEP 5 : CLIP TOP POINT
+-----------------------------------------
+
+P2 is TOP → intersect with top boundary.
+
+Top boundary:
+
+y = ymax = 50
+
+
+Formula:
+
+x = x1 + (x2 − x1) * (y − y1) / (y2 − y1)
+
+
+Substitute values:
+
+x = 5 + (40 − 5) * (50 − 20) / (60 − 20)
+
+x = 5 + 35 * 30 / 40
+
+x = 5 + 26.25
+
+x ≈ 31.25
+
+
+New point:
+
+P2' (31.25 , 50)
+
+
+-----------------------------------------
+FINAL CLIPPED LINE
+-----------------------------------------
+
+Original Line:
+
+P1 (5 , 20)
+P2 (40 , 60)
+
+After Clipping:
+
+P1' (10 , 25.7)
+P2' (31.25 , 50)
+
+Only this portion of the line inside the
+clipping window is drawn.
+
+
+-----------------------------------------
+SIMPLE VISUAL
+-----------------------------------------
+
+Before Clipping
+
+       *
+      /
+     /
++---------+
+|        /
+|       /
+|      *
++---------+
+
+
+After Clipping
+
++---------+
+|        *
+|       /
+|      *
++---------+
+
+
+-----------------------------------------
+LOGICAL AND (BITWISE AND)
+-----------------------------------------
+
+Logical AND compares two binary numbers.
+
+Rule:
+
+Bit1   Bit2   Result
+0      0      0
+0      1      0
+1      0      0
+1      1      1
+
+
+Important rule:
+
+Only 1 AND 1 = 1
+All other cases = 0
+
+`
+    },
+    {
+      id: 27,
+      question: "27. Explain Polygon Clipping (Sutherland–Hodgman Algorithm).",
+      answer: "📌 Important algorithm question.",
+      codeExample: `
+1️⃣ Idea of Polygon Clipping
+
+Polygon clipping removes the parts of a polygon that lie outside the clipping window and keeps only the 
+visible portion inside the window.
+
+One commonly used algorithm is:
+
+Sutherland–Hodgman Polygon Clipping Algorithm
+
+It clips the polygon edge by edge against the boundaries of the clipping window.
+
+
+2️⃣ How the Algorithm Works
+
+The clipping window has four boundaries:
+
+Left boundary
+Right boundary
+Bottom boundary
+Top boundary
+
+The polygon is processed one boundary at a time.
+
+After clipping against one boundary, the resulting vertices become the input for the next boundary.
+
+
+
+3️⃣ Clipping Polygon Edges
+
+The algorithm checks each edge of the polygon.
+For each pair of vertices:
+
+Previous vertex
+Current vertex
+
+It determines whether the points are inside or outside the boundary.
+
+
+There are four possible cases.
+
+| Case | Previous | Current | Action                               |
+| ---- | -------- | ------- | ------------------------------------ |
+| 1    | Inside   | Inside  | Output current vertex                |
+| 2    | Inside   | Outside | Output intersection point            |
+| 3    | Outside  | Inside  | Output intersection + current vertex |
+| 4    | Outside  | Outside | Output nothing                       |
+
+
+-----------------------------------------
+CLIPPING POLYGON EDGES
+-----------------------------------------
+
+The polygon is processed edge by edge.
+
+For each pair of vertices:
+Previous vertex
+Current vertex
+
+The algorithm determines whether the points
+are inside or outside the clipping boundary.
+
+Four cases are considered:
+
+Case 1:
+Previous inside, Current inside
+→ Output current vertex
+
+Case 2:
+Previous inside, Current outside
+→ Output intersection point
+
+Case 3:
+Previous outside, Current inside
+→ Output intersection point and current vertex
+
+Case 4:
+Previous outside, Current outside
+→ Output nothing
+
+
+
+PROCESSING AGAINST BOUNDARIES
+-----------------------------------------
+
+The polygon is clipped against each boundary
+of the clipping window sequentially.
+
+Boundaries are:
+
+1. Left boundary
+2. Right boundary
+3. Bottom boundary
+4. Top boundary
+
+After clipping against one boundary,
+the resulting polygon becomes the input
+for the next boundary.
+
+
+
+-------------------------------------------------------
+
+-----------------------------------------
+PREVIOUS AND CURRENT VERTEX
+(SUTHERLAND–HODGMAN ALGORITHM)
+-----------------------------------------
+
+1️⃣ WHAT IS PREVIOUS AND CURRENT VERTEX?
+
+When clipping a polygon, the algorithm checks
+each edge of the polygon one by one.
+
+An edge is formed by two vertices.
+
+Example polygon vertices:
+
+A → B → C → D → A
+
+
+While processing edges:
+
+Edge    Previous Vertex    Current Vertex
+AB      A                  B
+BC      B                  C
+CD      C                  D
+DA      D                  A
+
+
+So:
+
+Previous vertex = starting point of the edge
+Current vertex  = ending point of the edge
+
+The algorithm moves around the polygon
+vertex by vertex.
+
+
+-----------------------------------------
+2️⃣ SIMPLE POLYGON EXAMPLE
+-----------------------------------------
+
+Polygon:
+
+A(20,20)
+B(60,20)
+C(60,60)
+D(20,60)
+
+Traversal order:
+
+A → B → C → D → A
+
+
+Edges processed:
+
+Edge 1 : A → B
+Edge 2 : B → C
+Edge 3 : C → D
+Edge 4 : D → A
+
+
+For edge AB
+
+Previous = A
+Current  = B
+
+
+For edge BC
+
+Previous = B
+Current  = C
+
+
+-----------------------------------------
+3️⃣ DIAGRAM (POLYGON + CLIPPING WINDOW)
+-----------------------------------------
+
+Example clipping window:
+
+          C
+          *
+      +---------+
+      |         |
+      |   * D   |
+      |         |
+      +---------+
+  A *            * B
+
+
+Polygon vertices:
+
+A ---- B
+|      |
+|      |
+D ---- C
+
+
+Clipping window:
+
++---------+
+|         |
+|         |
+|         |
++---------+
+
+The algorithm checks each edge
+against the window boundaries.
+
+
+-----------------------------------------
+4️⃣ EDGE PROCESSING DIAGRAM
+-----------------------------------------
+
+Example edge:
+
+Previous (P) -------- Current (C)
+
+
+CASE 1 — BOTH INSIDE
+
++-------------+
+|   P ---- C  |
+|             |
++-------------+
+
+Output:
+C
+
+
+CASE 2 — INSIDE → OUTSIDE
+
++-------------+
+|   P ---- *  |
+|        /    |
++------X------+
+         C
+
+Output:
+Intersection point
+
+
+CASE 3 — OUTSIDE → INSIDE
+
+      P
+      *
++------X------+
+|      /      |
+|     C       |
++-------------+
+
+Output:
+Intersection + C
+
+
+CASE 4 — OUTSIDE → OUTSIDE
+
+P -------- C
+
++-------------+
+|             |
+|             |
++-------------+
+
+Output:
+Nothing
+
+
+-----------------------------------------
+5️⃣ SIMPLE RULE TO REMEMBER
+-----------------------------------------
+
+While checking each edge:
+
+Previous = first vertex of edge
+Current  = next vertex of edge
+
+
+The algorithm moves like this:
+
+P = first vertex
+C = next vertex
+
+Process edge P → C
+
+Then move forward:
+
+P = C
+C = next vertex
+      
+      `
+    },
+    {
+      id: 27,
+      question: "27. 2–3 MARK QUESTIONS",
+      answer: "",
+      codeExample: `
+-----------------------------------------
+POINT CLIPPING CONDITIONS
+-----------------------------------------
+
+Point clipping determines whether a point
+lies inside or outside the clipping window.
+
+A point P(x, y) is inside the clipping window if:
+
+xmin ≤ x ≤ xmax
+ymin ≤ y ≤ ymax
+
+If both conditions are satisfied:
+→ Point is accepted.
+
+If any condition is not satisfied:
+→ Point is rejected.
+
+
+-----------------------------------------
+REGION CODE MEANING
+-----------------------------------------
+
+Region code (Outcode) is a 4-bit binary code
+used in the Cohen–Sutherland Line Clipping Algorithm.
+
+It represents the position of a point relative
+to the clipping window.
+
+Bit order:
+
+TOP  BOTTOM  RIGHT  LEFT
+
+Meaning:
+
+0000 → Point is inside the window
+1000 → Point is above the window
+0100 → Point is below the window
+0010 → Point is right of the window
+0001 → Point is left of the window
+
+Region codes help quickly determine whether
+a line is inside, outside, or partially inside
+the clipping window.
+
+
+-----------------------------------------
+VIEW VOLUME
+-----------------------------------------
+
+View volume is the 3D region of space that
+contains the objects to be displayed.
+
+Only the objects inside the view volume
+are visible on the screen.
+
+Objects outside the view volume are clipped.
+
+The view volume acts as the viewing area
+for 3D graphics.
+
+
+-----------------------------------------
+NORMALIZED VIEW VOLUME
+-----------------------------------------
+
+Normalized view volume is a standard
+coordinate system used in computer graphics.
+
+After viewing transformation, the view volume
+is mapped into a normalized cube.
+
+The coordinates are typically transformed
+into the range:
+
+0 ≤ x ≤ 1
+0 ≤ y ≤ 1
+0 ≤ z ≤ 1
+
+This standard form simplifies further
+processing and rendering in the graphics system.
+      
+      `
+    },
+    {
       id: 1,
       question: "1. ",
       answer: "",
