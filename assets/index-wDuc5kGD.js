@@ -3510,7 +3510,7 @@ Then move forward:
 P = C
 C = next vertex
       
-      `},{id:27,question:"27. 2–3 MARK QUESTIONS",answer:"",codeExample:`
+      `},{id:28,question:"28. 2–3 MARK QUESTIONS",answer:"",codeExample:`
 -----------------------------------------
 POINT CLIPPING CONDITIONS
 -----------------------------------------
