@@ -3686,10 +3686,473 @@ processing and rendering in the graphics system.
       codeExample: ``
     },
     {
-      id: 1,
-      question: "1. ",
+      id: 11111,
+      question: "Mid Paper.",
       answer: "",
-      codeExample: ``
+      codeExample: `
+=========================================
+GRAPHICS PROGRAMMING - SOLVED PAPER
+=========================================
+
+
+-----------------------------------------
+Q1 (a) (i)
+Question: Define Flood Fill Algorithm.
+-----------------------------------------
+
+Answer:
+Flood Fill Algorithm is used to fill a connected
+region with a specified color starting from a
+seed point until the boundary is reached.
+
+
+-----------------------------------------
+Q1 (a) (ii)
+Question: What is 2D Translation transformation?
+-----------------------------------------
+
+Answer:
+2D Translation is a transformation that moves
+an object from one position to another by adding
+a constant value to its coordinates.
+
+x' = x + tx
+y' = y + ty
+
+
+-----------------------------------------
+Q1 (a) (iii)
+Question: What is a Viewport?
+-----------------------------------------
+
+Answer:
+Viewport is the rectangular area on the display
+screen where the final image is shown.
+
+
+-----------------------------------------
+Q1 (b) MCQs
+-----------------------------------------
+
+1. Flood Fill Algorithm
+2. Bresenham’s Algorithm
+3. Translation
+4. Viewport
+5. Line style
+6. (0, r)
+7. Antialiasing
+
+
+
+-----------------------------------------
+Q2 (a) (i)
+Question: Difference between DDA and Bresenham
+-----------------------------------------
+
+Answer:
+
+DDA Algorithm:
+- Uses floating point calculations
+- Slower
+- Less efficient
+
+Bresenham Algorithm:
+- Uses integer calculations
+- Faster
+- More efficient
+
+
+-----------------------------------------
+Q2 (a) (ii)
+Question: Difference between Flood Fill and Boundary Fill
+-----------------------------------------
+
+Answer:
+
+Flood Fill:
+- Fills area until boundary color is found
+- Uses interior color
+
+Boundary Fill:
+- Fills area until boundary is reached
+- Uses boundary color
+
+
+-----------------------------------------
+Q2 (b) (i)
+Question: Raster Scan vs Random Scan
+-----------------------------------------
+
+Answer:
+
+Raster Scan:
+- Draws image line by line
+- Used in TV, monitors
+- Advantage: Simple and low cost
+
+Random Scan:
+- Draws only required lines
+- Used in vector displays
+- Advantage: High resolution
+
+
+-----------------------------------------
+Q2 (b) (ii)
+Question: Midpoint Circle vs Bresenham Circle
+-----------------------------------------
+-----------------------------------------
+MIDPOINT CIRCLE vs BRESENHAM CIRCLE
+-----------------------------------------
+
+-----------------------------------------
+MIDPOINT CIRCLE ALGORITHM
+-----------------------------------------
+
+Definition:
+Midpoint Circle Algorithm is used to draw a
+circle using a decision parameter to choose
+the next pixel.
+
+It checks whether the midpoint is inside or
+outside the circle.
+
+
+-----------------------------------------
+INITIAL VALUES
+-----------------------------------------
+
+x = 0
+y = r
+
+Decision parameter:
+
+p = 1 - r
+
+
+-----------------------------------------
+ALGORITHM STEPS
+-----------------------------------------
+
+1. Input radius r and center (xc , yc)
+2. Initialize x = 0, y = r
+3. Calculate p = 1 - r
+4. Plot initial point (x , y)
+
+5. While x < y:
+
+   If p < 0:
+      x = x + 1
+      p = p + 2x + 1
+
+   Else:
+      x = x + 1
+      y = y - 1
+      p = p + 2x + 1 - 2y
+
+6. Plot symmetric points using 8-way symmetry
+
+
+-----------------------------------------
+FEATURES
+-----------------------------------------
+
+✔ Uses decision parameter
+✔ Based on midpoint concept
+❌ May involve floating calculations
+
+
+-----------------------------------------
+BRESENHAM CIRCLE ALGORITHM
+-----------------------------------------
+
+Definition:
+Bresenham Circle Algorithm is an efficient
+algorithm that uses only integer calculations
+to draw a circle.
+
+
+-----------------------------------------
+INITIAL VALUES
+-----------------------------------------
+
+x = 0
+y = r
+
+Decision parameter:
+
+p = 3 - 2r
+
+
+-----------------------------------------
+ALGORITHM STEPS
+-----------------------------------------
+
+1. Input radius r and center (xc , yc)
+2. Initialize x = 0, y = r
+3. Calculate p = 3 - 2r
+4. Plot initial point (x , y)
+
+5. While x < y:
+
+   If p < 0:
+      x = x + 1
+      p = p + 4x + 6
+
+   Else:
+      x = x + 1
+      y = y - 1
+      p = p + 4x + 6 - 4y
+
+6. Plot symmetric points using 8-way symmetry
+
+
+-----------------------------------------
+FEATURES
+-----------------------------------------
+
+✔ Uses only integer arithmetic
+✔ Faster and more efficient
+✔ Widely used in graphics systems
+
+
+-----------------------------------------
+DIFFERENCE BETWEEN BOTH
+-----------------------------------------
+
+Midpoint Circle:
+- Uses p = 1 - r
+- Concept based on midpoint
+- Slightly slower
+- May use floating operations
+
+Bresenham Circle:
+- Uses p = 3 - 2r
+- Uses integer calculations only
+- Faster and efficient
+- More practical for implementation
+
+
+
+
+-----------------------------------------
+Q3 (i)
+Question: Scan-line Polygon Fill Algorithm
+-----------------------------------------
+
+Answer:
+
+Steps:
+1. Find intersections of scan line with polygon edges
+2. Sort intersection points
+3. Fill pixels between pairs of intersections
+4. Repeat for all scan lines
+
+Used to fill polygons efficiently.
+
+
+-----------------------------------------
+Q3 (ii)
+Question: Transformation of point P(2,3)
+-----------------------------------------
+
+Answer:
+
+Given:
+P = (2,3)
+
+Step 1: Translation (2,1)
+(2+2 , 3+1) = (4,4)
+
+Step 2: Rotation 90° anticlockwise
+(x,y) → (-y,x)
+
+(4,4) → (-4,4)
+
+Step 3: Scaling (2,2)
+(-4×2 , 4×2) = (-8 , 8)
+
+Final Answer:
+(-8 , 8)
+
+
+-----------------------------------------
+Q3 (iii)
+Question: Importance of Computer Graphics
+-----------------------------------------
+
+Answer:
+
+1. Education:
+Visual learning, simulations
+
+2. Medical:
+CT scan, MRI visualization
+
+3. Entertainment:
+Games, movies, animation
+
+CG improves understanding and visualization.
+
+
+
+-----------------------------------------
+Q4 (a)
+Question: DDA Line from (2,3) to (10,7)
+-----------------------------------------
+
+-----------------------------------------
+DDA LINE DRAWING ALGORITHM
+-----------------------------------------
+
+1. Input: (x1, y1) and (x2, y2)
+2. Calculate:
+   dx = x2 - x1
+   dy = y2 - y1
+3. steps = max(|dx|, |dy|)
+4. x_inc = dx / steps
+   y_inc = dy / steps
+5. Initialize:
+   x = x1
+   y = y1
+6. Plot (x, y)
+7. Repeat for steps:
+   x = x + x_inc
+   y = y + y_inc
+   Plot (round(x), round(y))
+
+
+-----------------------------------------
+CALCULATION
+-----------------------------------------
+
+Given:
+(2,3) to (10,7)
+
+dx = 8
+dy = 4
+
+steps = 8
+
+x_inc = 1
+y_inc = 0.5
+
+
+-----------------------------------------
+POINTS
+-----------------------------------------
+
+(2,3)
+(3,3.5)
+(4,4)
+(5,4.5)
+(6,5)
+(7,5.5)
+(8,6)
+(9,6.5)
+(10,7)
+
+
+-----------------------------------------
+Q4 (b)
+Question: Rotation of point (3,4)
+-----------------------------------------
+
+-----------------------------------------
+2D ROTATION ALGORITHM
+-----------------------------------------
+
+1. Input point (x, y)
+2. Choose angle θ
+3. Apply formula:
+
+x' = x cosθ - y sinθ
+y' = x sinθ + y cosθ
+
+
+-----------------------------------------
+FOR 90° ANTICLOCKWISE
+-----------------------------------------
+
+cos90 = 0
+sin90 = 1
+
+So:
+
+x' = -y
+y' = x
+
+
+-----------------------------------------
+CALCULATION
+-----------------------------------------
+
+Given:
+(3,4)
+
+x' = -4
+y' = 3
+
+Final Answer:
+(-4 , 3)
+
+
+-----------------------------------------
+Q4 (b) OR
+Question: Bresenham Line from (0,0) to (6,3)
+-----------------------------------------
+
+-----------------------------------------
+BRESENHAM LINE ALGORITHM
+-----------------------------------------
+
+1. Input: (x1, y1), (x2, y2)
+2. Calculate:
+   dx = x2 - x1
+   dy = y2 - y1
+3. Decision parameter:
+   p = 2dy - dx
+4. Initialize:
+   x = x1
+   y = y1
+5. Plot (x, y)
+
+6. Repeat until x = x2:
+
+   If p < 0:
+      x = x + 1
+      p = p + 2dy
+
+   Else:
+      x = x + 1
+      y = y + 1
+      p = p + 2dy - 2dx
+
+   Plot (x, y)
+
+
+-----------------------------------------
+CALCULATION
+-----------------------------------------
+
+dx = 6
+dy = 3
+
+p = 2dy - dx = 6 - 6 = 0
+
+
+-----------------------------------------
+POINTS
+-----------------------------------------
+
+(0,0)
+(1,0)
+(2,1)
+(3,1)
+(4,2)
+(5,2)
+(6,3)
+
+`
     },
     {
       id: 1,
