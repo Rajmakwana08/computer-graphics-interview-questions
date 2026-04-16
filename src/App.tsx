@@ -5453,34 +5453,1489 @@ Back-face → remove invisible surfaces
       `
     },
     {
-      id: 1,
-      question: "1. ",
-      answer: "",
-      codeExample: ``
+      id: 41,
+      question: "41. What is Multimedia and Animation?",
+      answer: "📌 Basic theory question",
+      codeExample: `
+⭐ What is Multimedia?
+
+🎯 Definition
+
+Multimedia is the combination of different types of media such as:
+
+• Text
+• Images
+• Audio
+• Video
+• Animation
+
+👉 Simple meaning:
+Using many types of media together
+
+
+🎯 Example
+
+YouTube Video =
+Video + Audio + Text + Animation
+
+
+⭐ What is Animation?
+
+🎯 Definition
+
+Animation is the process of creating movement by displaying a sequence of images (frames)
+
+👉 Simple meaning:
+Many images shown quickly → looks like motion
+
+
+🎯 Real Life Idea
+
+Flipbook 📖
+
+Page 1 → small change
+Page 2 → small change
+Page 3 → small change
+
+👉 Flip fast → looks like motion
+👉 This is Animation
+
+
+⭐ Applications of Multimedia & Animation
+
+1️⃣ Education
+• Online learning
+• Animated videos
+
+2️⃣ Entertainment
+• Movies 🎬
+• Games 🎮
+
+3️⃣ Advertising
+• Product ads
+• Social media content
+
+4️⃣ Business
+• Presentations
+• Training videos
+
+5️⃣ Medical Field
+• Surgery simulation
+• Training animations
+
+
+⭐ Quick Difference
+
+Multimedia → Combination of media
+Animation  → Moving images (frames)
+
+
+🎯 Memory Trick
+
+Multimedia → MANY media
+Animation  → MOVEMENT
+
+
+✅ One Line (Exam)
+
+Multimedia is the integration of text, audio, video, and animation, while animation 
+creates motion using a sequence of images.
+      
+      `
     },
     {
-      id: 1,
-      question: "1. ",
-      answer: "",
-      codeExample: ``
+      id: 42,
+      question: "42. Explain Flash Interface.",
+      answer: "📌 Very common exam question",
+      codeExample: `
+⭐ Flash Interface
+
+🎯 Definition
+
+Flash Interface is the working area where we create animations and designs.
+
+👉 It includes:
+• Stage
+• Timeline
+• Layers
+• Properties Panel
+
+
+1️⃣ Stage ⭐
+
+🎯 Definition
+
+Stage is the main drawing area
+
+👉 Simple meaning:
+Screen / Canvas where objects are placed
+
+Example:
+Draw circle, text, image here
+
+👉 Whatever is on stage → visible in final animation
+
+
+2️⃣ Timeline ⭐
+
+🎯 Definition
+
+Timeline controls animation and time
+
+👉 Simple meaning:
+Shows frames (steps of animation)
+
+Example:
+Frame 1 → image
+Frame 2 → small change
+Frame 3 → movement
+
+👉 More frames = smoother animation
+
+
+3️⃣ Layers
+
+🎯 Definition
+
+Layers organize objects separately
+
+👉 Simple meaning:
+Like stack of sheets
+
+Example:
+Layer 1 → background
+Layer 2 → character
+Layer 3 → text
+
+👉 Helps avoid mixing objects
+
+
+4️⃣ Properties Panel
+
+🎯 Definition
+
+Used to change object settings
+
+👉 Simple meaning:
+Edit size, color, position
+
+Example:
+• Change color
+• Change width/height
+• Change position
+
+
+⭐ Summary
+
+Stage     → Drawing area
+Timeline  → Animation control
+Layers    → Organize objects
+Properties→ Edit objects
+
+
+🎯 Memory Trick
+
+Stage → Draw
+Timeline → Time
+Layers → Organize
+Properties → Edit
+
+
+✅ One Line (Exam)
+
+Flash interface consists of stage, timeline, layers, and 
+properties panel used for creating and controlling animations.
+      
+      `
     },
     {
-      id: 1,
-      question: "1. ",
-      answer: "",
-      codeExample: ``
+      id: 43,
+      question: "43. Explain Frames and Keyframes.",
+      answer: "📌 Important short/long question",
+      codeExample: `
+⭐ Frames and Keyframes
+
+🎯 Basic Idea
+
+Animation = many images (frames) shown quickly → looks like motion
+
+
+1️⃣ Frame
+
+🎯 Definition
+
+Frame is a single image in an animation sequence
+
+👉 Simple meaning:
+One picture = One frame
+
+Example:
+Frame 1 → Ball at left
+Frame 2 → Ball moves slightly
+Frame 3 → Ball moves more
+
+👉 Many frames together → Animation
+
+
+2️⃣ Keyframe ⭐
+
+🎯 Definition
+
+Keyframe is a special frame where major change happens
+
+👉 Simple meaning:
+Important frame (start / end / big change)
+
+Example:
+
+Keyframe 1 → Ball at start
+Keyframe 2 → Ball at end
+
+👉 Computer fills in-between frames automatically
+
+
+🎯 Role in Animation
+
+Frames:
+👉 Show smooth movement
+
+Keyframes:
+👉 Define important positions (start & end)
+
+
+🎯 Very Important Example
+
+Keyframe 1 → Ball at left
+Frames      → Smooth movement
+Keyframe 2 → Ball at right
+
+👉 Final result → Moving ball animation
+
+
+⭐ Difference
+
+| Feature | Frame         | Keyframe        |
+| ------- | ------------- | --------------- |
+| Meaning | Normal image  | Important image |
+| Change  | Small change  | Major change    |
+| Role    | Smooth motion | Define motion   |
+| Number  | Many          | Few             |
+
+
+🎯 Memory Trick
+
+Frame → Every step
+Keyframe → Important step
+
+
+✅ One Line (Exam)
+
+Frames are individual images in animation, while keyframes define major 
+changes and control the animation.
+      
+      `
     },
     {
-      id: 1,
-      question: "1. ",
-      answer: "",
-      codeExample: ``
+      id: 44,
+      question: "44. Explain Types of Animation in Flash.",
+      answer: "📌 Very important question",
+      codeExample: `
+⭐ Types of Animation in Flash
+
+🎯 Basic Idea
+
+Animation in Flash can be created using:
+
+1. Frame-by-Frame Animation
+2. Tween Animation ⭐
+   • Motion Tween
+   • Shape Tween
+
+
+1️⃣ Frame-by-Frame Animation
+
+🎯 Definition
+
+Each frame is drawn separately
+
+👉 Simple meaning:
+Like a flipbook (every frame is different)
+
+Example:
+Frame 1 → Ball left
+Frame 2 → Ball middle
+Frame 3 → Ball right
+
+👉 You draw each step manually
+
+✔ Advantage:
+Full control
+
+❌ Disadvantage:
+Time-consuming
+
+
+2️⃣ Tween Animation ⭐
+
+🎯 Definition
+
+Computer automatically creates in-between frames
+
+👉 Simple meaning:
+You set start and end, Flash fills the motion
+
+Example:
+Keyframe 1 → Ball left
+Keyframe 2 → Ball right
+
+👉 Smooth animation automatically created
+
+
+⭐ Types of Tween Animation
+
+🔹 2.1 Motion Tween ⭐
+
+🎯 Definition
+
+Used to MOVE object from one position to another.
+
+👉 What changes:
+• Position
+• Size
+• Rotation
+• Opacity
+
+Example:
+Ball moves left → right
+
+👉 Shape remains SAME
+
+
+🔹 2.2 Shape Tween
+
+🎯 Definition
+
+Used to CHANGE shape of object.
+
+Example:
+Circle → Square
+
+Key Point:
+👉 Shape changes completely
+
+
+⭐ Summary
+
+| Type           | Work                     |
+| -------------- | ------------------------ |
+| Frame-by-frame | Draw each frame manually |
+| Motion Tween   | Move object              |
+| Shape Tween    | Change shape             |
+
+
+🎯 Memory Trick
+
+Frame-by-frame → Draw ALL
+Motion Tween   → MOVE
+Shape Tween    → SHAPE change
+
+
+✅ One Line (Exam)
+
+Flash animation includes frame-by-frame animation and tween animation, where motion tween 
+moves objects and shape tween changes shapes.    
+  
+      `
     },
     {
-      id: 1,
-      question: "1. ",
+      id: 45,
+      question: "45. Explain Layers in Flash.",
+      answer: "📌 Often asked",
+      codeExample: `
+⭐ Layers in Flash
+
+🎯 Definition
+
+Layers are used to organize objects separately in Flash
+
+👉 Simple meaning:
+Like transparent sheets stacked on each other
+
+
+🎯 Structure Example
+
+Top Layer    → Text
+Middle Layer → Character
+Bottom Layer → Background
+
+👉 Each layer works independently
+
+
+⭐ Types of Layers
+
+1️⃣ Normal Layer
+
+🎯 Definition:
+Standard layer used to draw objects
+
+👉 Use:
+• Shapes
+• Text
+• Animation
+
+Example:
+Circle, square, text
+
+
+2️⃣ Mask Layer
+
+🎯 Definition:
+Used to hide/show parts of another layer
+
+👉 Simple meaning:
+Like a window effect
+
+Example:
+Only part of image is visible
+
+
+3️⃣ Masked Layer
+
+🎯 Definition:
+Layer affected by mask layer
+
+👉 Simple meaning:
+Shows only visible area defined by mask
+
+Example:
+Image visible inside mask shape
+
+
+4️⃣ Guide Layer
+
+🎯 Definition:
+Helps define path for motion
+
+👉 Simple meaning:
+Draw path for object to follow
+
+Example:
+Curved line for movement
+
+
+5️⃣ Guided Layer ⭐
+
+🎯 Definition:
+Object follows path from guide layer
+
+👉 Simple meaning:
+Object moves along guide path
+
+Example:
+Ball moves in curve path
+
+
+⭐ Summary
+
+Normal → Draw objects
+Mask   → Hide/Show
+Masked → Visible part only
+Guide  → Path
+Guided → Follow path
+
+
+🎯 Memory Trick
+
+Normal → Draw
+Mask → Hide
+Masked → Show part
+Guide → Path
+Guided → Follow path
+
+
+✅ One Line (Exam)
+
+Layers in Flash organize objects and include normal, mask, masked, guide, and guided layers 
+for visibility and motion control.
+      
+      `
+    },
+    {
+      id: 46,
+      question: "46. Explain Motion Tween Animation with steps.",
+      answer: "📌 Practical + theory question",
+      codeExample: `
+⭐ Motion Tween Animation
+
+🎯 Definition
+
+Motion Tween is used to move an object from one position to another automatically
+
+👉 Simple meaning:
+Set START + END → Flash creates movement
+
+
+🎯 Concept
+
+Start Position → End Position
+Flash creates smooth motion between them
+
+
+⭐ Steps of Motion Tween (VERY IMPORTANT)
+
+1️⃣ Create Object
+
+👉 Draw shape on Stage
+Example: Ball, text, image
+
+
+2️⃣ Convert to Symbol ⭐
+
+👉 Right click → Convert to Symbol (F8)
+
+👉 Required for motion tween
+
+
+3️⃣ Create Keyframes ⭐
+
+👉 Frame 1  → Insert Keyframe
+👉 Frame 20 → Insert Keyframe
+
+👉 Start and End points
+
+
+4️⃣ Move Object ⭐
+
+👉 Go to Frame 20
+👉 Move object to new position
+
+Example:
+Frame 1  → Ball at left
+Frame 20 → Ball at right
+
+
+5️⃣ Apply Motion Tween
+
+👉 Right click between frames
+→ Create Motion Tween
+
+👉 Flash creates animation automatically
+
+
+6️⃣ Use Timeline ⭐
+
+👉 Timeline controls animation speed
+
+👉 More frames = smoother motion
+
+
+🎯 Example
+
+Frame 1  → Ball left
+Frame 20 → Ball right
+
+👉 Result:
+Ball moves smoothly left → right
+
+
+⭐ Important Roles
+
+| Part            | Role                    |
+| --------------- | ----------------------- |
+| Keyframes       | Define start & end      |
+| Object Movement | Change position         |
+| Timeline        | Controls animation time |
+
+
+⭐ Advantages
+
+✔ Easy to use
+✔ Saves time
+✔ Smooth animation
+
+
+🎯 Memory Trick
+
+Draw → Convert → Keyframe → Move → Tween
+
+
+✅ One Line (Exam)
+
+Motion tween animation creates smooth movement by defining keyframes and automatically 
+generating intermediate frames.
+      
+      `
+    },
+    {
+      id: 47,
+      question: "47. Explain Flash Tools (any 5).",
+      answer: "📌 Short question",
+      codeExample: `
+⭐ Flash Tools (Any 5)
+
+🎯 Definition
+
+Flash tools are used to draw, edit, and create objects in animation
+
+
+1️⃣ Selection Tool
+
+👉 Use:
+Select and move objects
+
+Example:
+Click shape → drag it
+
+
+2️⃣ Line Tool
+
+👉 Use:
+Draw straight lines
+
+Example:
+Draw line between two points
+
+
+3️⃣ Brush Tool
+
+👉 Use:
+Draw freehand shapes
+
+Example:
+Like painting with brush
+
+
+4️⃣ Text Tool
+
+👉 Use:
+Add text
+
+Example:
+Write "Hello"
+
+
+5️⃣ Eraser Tool
+
+👉 Use:
+Remove unwanted parts
+
+Example:
+Erase lines or shapes
+
+
+⭐ Summary
+
+Selection → Select & move
+Line      → Draw straight line
+Brush     → Freehand drawing
+Text      → Add text
+Eraser    → Remove drawing
+
+
+🎯 Memory Trick
+
+Select → Draw → Paint → Write → Erase
+
+
+✅ One Line (Exam)
+
+Flash tools like selection, line, brush, text, and eraser are used to create and edit animation objects.
+      
+      `
+    },
+    {
+      id: 48,
+      question: "48. 2–3 MARK (JUST READ)",
       answer: "",
-      codeExample: ``
+      codeExample: `
+⭐ Flash Basics (Important Terms)
+
+1️⃣ .fla → Source File
+
+👉 Original editable file in Flash
+
+👉 Simple meaning:
+File where you CREATE and EDIT animation
+
+Contains:
+• Layers
+• Timeline
+• Objects
+
+
+2️⃣ .swf → Output File
+
+👉 Final output file
+
+👉 Simple meaning:
+File used to PLAY animation
+
+Used in:
+• Browser
+• Media player
+
+
+3️⃣ Stage → Working Area
+
+👉 Main drawing area
+
+👉 Simple meaning:
+Canvas / Screen
+
+👉 Whatever is on stage → visible in final animation
+
+
+4️⃣ Timeline → Animation Control
+
+👉 Controls frames and timing
+
+👉 Simple meaning:
+Shows animation flow over time
+
+👉 More frames = smoother animation
+
+
+5️⃣ Keyframe → Change Point
+
+👉 Frame where major change happens
+
+👉 Simple meaning:
+Start / End of movement
+
+Example:
+Frame 1  → Ball left
+Frame 20 → Ball right
+
+
+⭐ Super Short Summary
+
+.fla     → Editable file
+.swf     → Output file
+Stage    → Drawing area
+Timeline → Controls animation
+Keyframe → Important change
+
+
+🎯 Memory Trick
+
+Edit → Play → Draw → Time → Change
+
+
+✅ One Line (Exam)
+
+.fla is the editable file, .swf is the output file, stage is the drawing area, timeline controls animation, 
+and keyframe defines major changes.
+      
+      `
+    },
+    {
+      id: 51,
+      question: "51. What is MATLAB? Explain its features and uses.",
+      answer: "📌 Basic theory question",
+      codeExample: `
+⭐ What is MATLAB?
+
+🎯 Full Form
+
+MATLAB = Matrix Laboratory
+
+
+🎯 Simple Meaning
+
+MATLAB is a software used to solve mathematical problems easily
+
+👉 Think:
+Calculator → small math
+MATLAB     → big & complex math
+
+
+🧠 Real Life Example
+
+2 + 3 = 5  → simple
+
+But:
+1000 numbers + graph + equation
+
+👉 MATLAB solves it quickly
+
+
+⭐ Features (Easy)
+
+1️⃣ Matrix Based ⭐
+
+👉 Works with matrices (tables of numbers)
+
+Example:
+[1 2 3]
+[4 5 6]
+
+
+2️⃣ Easy Calculation
+
+👉 Direct calculation
+
+Example:
+2 + 3 → 5
+
+✔ Fast and simple
+
+
+3️⃣ Graph / Visualization ⭐
+
+👉 Draw graphs easily
+
+Example:
+y = x²
+
+✔ Helps understand data
+
+
+4️⃣ Ready Functions
+
+👉 Built-in functions available
+
+Examples:
+sin(), cos(), sqrt()
+
+✔ No need for long code
+
+
+⭐ Uses (Important)
+
+1️⃣ Data Analysis
+👉 Work with large data
+
+2️⃣ Simulation ⭐
+👉 Test real-world systems
+• Machines
+• Circuits
+
+3️⃣ Visualization ⭐
+👉 Draw graphs and charts
+
+4️⃣ Engineering
+👉 Used in engineering fields
+
+
+⭐ Summary
+
+MATLAB → Math solving software
+Matrix → Table of numbers
+Graph  → Visualization
+Data   → Analysis
+
+
+🎯 Memory Trick
+
+MATLAB = Math + Graph + Data
+
+
+✅ One Line (Exam)
+
+MATLAB is a software used for mathematical computation, data analysis, and graphical visualization.
+      `
+    },
+    {
+      id: 52,
+      question: "52. Explain MATLAB Environment.",
+      answer: "📌 Frequently asked",
+      codeExample: `
+🎯 MATLAB Environment
+
+👉 MATLAB environment = Working area where you write commands and see results
+
+👉 It has different parts like:
+
+Command Window ⭐
+Workspace
+Current Directory
+File Path
+
+---------------------------------------
+
+1️⃣ Command Window ⭐
+Definition:
+Place where you type commands and get output
+
+Simple Meaning:
+👉 Like a calculator box
+
+Example:
+>> 2 + 3
+ans = 5
+
+👉 Input → Output
+
+---------------------------------------
+
+2️⃣ Workspace
+Definition:
+Shows all variables and their values
+
+Simple Meaning:
+👉 Stores your data
+
+Example:
+a = 10
+b = 20
+
+Workspace shows:
+a = 10
+b = 20
+
+---------------------------------------
+
+3️⃣ Current Directory
+Definition:
+Shows files and folders you are working with
+
+Simple Meaning:
+👉 Like a computer folder
+
+Example:
+Shows:
+- .m files
+- data files
+
+---------------------------------------
+
+4️⃣ File Path
+Definition:
+Shows location of current folder
+
+Simple Meaning:
+👉 Address of files
+
+Example:
+C:\\Users\\Student\\Documents\\MATLAB
+
+---------------------------------------
+
+⭐ Summary (Exam Ready)
+
+Command Window → Run commands  
+Workspace → Store variables  
+Current Directory → Show files  
+File Path → Show location  
+
+---------------------------------------
+
+🎯 Easy Memory Trick
+
+Command → Run  
+Workspace → Store  
+Directory → Files  
+Path → Location  
+      
+      `
+    },
+    {
+      id: 53,
+      question: "53. Explain Decision Statements & Looping in MATLAB.",
+      answer: "📌 Important short/long question",
+      codeExample: `
+🎯 Decision Statements & Looping in MATLAB
+
+👉 Decision = take decision (condition)
+👉 Loop = repeat work
+
+---------------------------------------
+
+⭐ 1️⃣ Decision Statements
+
+👉 Used to check conditions
+
+---------------------------------------
+
+🔹 (a) if Statement
+
+Definition:
+Executes code only if condition is TRUE
+
+Syntax:
+if condition
+    statements
+end
+
+Example:
+a = 10;
+
+if a > 5
+    disp("a is greater than 5");
+end
+
+---------------------------------------
+
+🔹 (b) if-else Statement
+
+Definition:
+One block runs if TRUE, another if FALSE
+
+Syntax:
+if condition
+    statements
+else
+    statements
+end
+
+Example:
+a = 3;
+
+if a > 5
+    disp("Greater");
+else
+    disp("Smaller");
+end
+
+---------------------------------------
+
+🔹 (c) switch Statement ⭐
+
+Definition:
+Used for multiple cases (conditions)
+
+Syntax:
+switch variable
+    case value1
+        statements
+    case value2
+        statements
+    otherwise
+        statements
+end
+
+Example:
+day = 2;
+
+switch day
+    case 1
+        disp("Monday");
+    case 2
+        disp("Tuesday");
+    otherwise
+        disp("Other day");
+end
+
+---------------------------------------
+
+⭐ 2️⃣ Looping (for loop)
+
+👉 Used to repeat code
+
+---------------------------------------
+
+🔹 for Loop
+
+Syntax:
+for i = start:end
+    statements
+end
+
+Example:
+for i = 1:5
+    disp(i);
+end
+
+Output:
+1
+2
+3
+4
+5
+
+---------------------------------------
+
+⭐ Summary (Exam Ready)
+
+if        → check condition  
+if-else   → two options  
+switch    → multiple options  
+for loop  → repeat  
+
+---------------------------------------
+
+🎯 Easy Memory Trick
+
+if → check  
+else → other option  
+switch → many options  
+for → repeat  
+
+---------------------------------------
+
+✅ One Line Answer
+
+Decision statements (if, if-else, switch) are used for conditions, and loops (for) are 
+used for repetition in MATLAB.
+      
+      `
+    },
+    {
+      id: 54,
+      question: "54. Explain Basic Image Processing Functions in MATLAB.",
+      answer: "📌 Very important practical question",
+      codeExample: `
+🎯 Basic Image Processing Functions in MATLAB
+
+👉 Used to read, display, modify, and save images
+
+---------------------------------------
+
+1️⃣ imread() ⭐
+
+Use:
+👉 Read/load image
+
+Syntax:
+img = imread('image.jpg');
+
+Simple Meaning:
+👉 Load image into MATLAB
+
+---------------------------------------
+
+2️⃣ imshow()
+
+Use:
+👉 Display image
+
+Syntax:
+imshow(img);
+
+Simple Meaning:
+👉 Show image on screen
+
+---------------------------------------
+
+3️⃣ imresize()
+
+Use:
+👉 Change size of image
+
+Syntax:
+new_img = imresize(img, 0.5);
+
+Simple Meaning:
+👉 Resize image (small/big)
+
+---------------------------------------
+
+4️⃣ imwrite()
+
+Use:
+👉 Save image
+
+Syntax:
+imwrite(img, 'newimage.jpg');
+
+Simple Meaning:
+👉 Save image to file
+
+---------------------------------------
+
+5️⃣ rgb2gray()
+
+Use:
+👉 Convert color image → grayscale
+
+Syntax:
+gray = rgb2gray(img);
+
+Simple Meaning:
+👉 Color → Black & White
+
+---------------------------------------
+
+⭐ Example (Full Program)
+
+img = imread('image.jpg');     % read image
+imshow(img);                   % display image
+
+gray = rgb2gray(img);          % convert to grayscale
+imshow(gray);
+
+small = imresize(img, 0.5);    % resize
+imwrite(small, 'output.jpg');  % save image
+
+---------------------------------------
+
+⭐ Summary (Exam Ready)
+
+imread()   → Read image  
+imshow()   → Display image  
+imresize() → Resize image  
+imwrite()  → Save image  
+rgb2gray() → Convert to grayscale  
+
+---------------------------------------
+
+🎯 Easy Memory Trick
+
+read → show → resize → save → gray  
+
+---------------------------------------
+
+✅ One Line Answer
+
+MATLAB image processing functions like imread, imshow, imresize, imwrite, and rgb2gray are used to 
+read, display, resize, and save images.
+      
+      `
+    },
+    {
+      id: 55,
+      question: "55. Explain Types of Images and Digital Image Processing Steps.",
+      answer: "📌 Important theory question",
+      codeExample: `
+🎯 Types of Images & Image Processing Steps
+
+👉 Images are classified based on pixel values
+
+---------------------------------------
+
+⭐ 1️⃣ Types of Images
+
+---------------------------------------
+
+1️⃣ Binary Image
+
+Definition:
+Image with only 2 colors
+
+0 → Black  
+1 → White  
+
+Simple Meaning:
+👉 Only black & white
+
+Example:
+Text documents, QR codes
+
+---------------------------------------
+
+2️⃣ Grayscale Image
+
+Definition:
+Image with shades of gray
+
+0 → Black  
+255 → White  
+
+Simple Meaning:
+👉 Light to dark (no color)
+
+Example:
+Black & white photos
+
+---------------------------------------
+
+3️⃣ RGB Image ⭐
+
+Definition:
+Image made using Red, Green, Blue
+
+Simple Meaning:
+👉 Color image
+
+Example:
+(R, G, B)
+
+(255,0,0) → Red  
+(0,255,0) → Green  
+(0,0,255) → Blue  
+
+Key Point:
+👉 Most common image type
+
+---------------------------------------
+
+⭐ 2️⃣ Digital Image Processing Steps
+
+---------------------------------------
+
+1️⃣ Image Acquisition
+
+Meaning:
+👉 Capture image
+
+Example:
+Take photo using mobile
+
+---------------------------------------
+
+2️⃣ Image Enhancement
+
+Meaning:
+👉 Improve quality
+
+Example:
+Increase brightness, remove noise
+
+---------------------------------------
+
+3️⃣ Segmentation
+
+Meaning:
+👉 Divide image into parts
+
+Example:
+Separate object from background
+
+---------------------------------------
+
+4️⃣ Recognition
+
+Meaning:
+👉 Identify objects
+
+Example:
+Face detection, object detection
+
+---------------------------------------
+
+⭐ Summary (Exam Ready)
+
+Binary      → Black & white  
+Grayscale   → Shades of gray  
+RGB         → Color image  
+
+Acquisition → Capture image  
+Enhancement → Improve quality  
+Segmentation→ Divide image  
+Recognition → Identify object  
+
+---------------------------------------
+
+🎯 Easy Memory Trick
+
+Types → BGR (Binary, Gray, RGB)  
+Steps → AESR (Acquire, Enhance, Segment, Recognize)  
+
+---------------------------------------
+
+✅ One Line Answer
+
+Images can be binary, grayscale, or RGB, and image processing includes acquisition, 
+enhancement, segmentation, and recognition.
+      
+      `
+    },
+    {
+      id: 56,
+      question: "56. 2–3 MARK (JUST READ)",
+      answer: "",
+      codeExample: `
+🎯 MATLAB Basics + Image Concepts
+
+---------------------------------------
+
+1️⃣ MATLAB Variables → No Declaration Needed
+
+👉 No need to declare variables
+
+Simple Meaning:
+👉 Directly assign value
+
+Example:
+a = 10;
+
+✔ No data type needed (int, float, etc.)
+
+---------------------------------------
+
+2️⃣ Matrix = Main Data Structure ⭐
+
+👉 Everything in MATLAB is a matrix
+
+Simple Meaning:
+👉 Data stored in rows & columns
+
+Example:
+A = [1 2 3; 4 5 6];
+
+✔ All operations are matrix-based
+
+---------------------------------------
+
+3️⃣ RGB → 3 Components ⭐
+
+👉 RGB means:
+
+R → Red  
+G → Green  
+B → Blue  
+
+Simple Meaning:
+👉 Color image = combination of R, G, B
+
+Example:
+(255,0,0) → Red  
+(0,255,0) → Green  
+(0,0,255) → Blue  
+
+---------------------------------------
+
+4️⃣ Pixel → Smallest Unit of Image
+
+👉 Pixel = smallest part of image
+
+Simple Meaning:
+👉 Image = collection of tiny dots
+
+Example:
+Each pixel has a color value
+
+---------------------------------------
+
+5️⃣ Key Functions ⭐
+
+👉 Important MATLAB image functions
+
+---------------------------------------
+
+🔹 imread()
+
+Use:
+👉 Read/load image
+
+Syntax:
+img = imread('image.jpg');
+
+---------------------------------------
+
+🔹 imshow()
+
+Use:
+👉 Display image
+
+Syntax:
+imshow(img);
+
+---------------------------------------
+
+⭐ Summary (Exam Ready)
+
+Variables → No declaration  
+Matrix    → Main data structure  
+RGB       → 3 colors (R, G, B)  
+Pixel     → Smallest unit  
+imread()  → Read image  
+imshow()  → Display image  
+
+---------------------------------------
+
+🎯 Easy Memory Trick
+
+No type → Matrix → RGB → Pixel → Read → Show  
+
+---------------------------------------
+
+✅ One Line Answer
+
+MATLAB uses matrices as main data structures, variables need no declaration, and image processing uses 
+concepts like RGB, pixels, imread, and imshow.
+      
+      `
     },
     {
       id: 1,
