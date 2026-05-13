@@ -7710,6 +7710,1200 @@ int main(int argc, char** argv)
       `
     },
     {
+      id: 10.10,
+      question: "10. Cohen-Sutherland Line Clipping",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <stdio.h>
+
+// Clipping window boundaries
+float xmin = 100, ymin = 100, xmax = 300, ymax = 300;
+
+// Line endpoints
+float x1 = 50, y1 = 50, x2 = 350, y2 = 350;
+
+// Region codes
+#define INSIDE 0   // 0000
+#define LEFT 1     // 0001
+#define RIGHT 2    // 0010
+#define BOTTOM 4   // 0100
+#define TOP 8      // 1000
+
+// Function to compute region code
+int computeCode(float x, float y) {
+
+    int code = INSIDE;
+
+    if (x < xmin)
+        code |= LEFT;
+
+    else if (x > xmax)
+        code |= RIGHT;
+
+    if (y < ymin)
+        code |= BOTTOM;
+
+    else if (y > ymax)
+        code |= TOP;
+
+    return code;
+}
+
+// Cohen-Sutherland clipping algorithm
+void cohenSutherlandClip() {
+
+    float x, y;
+
+    int code1 = computeCode(x1, y1);
+    int code2 = computeCode(x2, y2);
+
+    int accept = 0;
+
+    while (1) {
+
+        if ((code1 == 0) && (code2 == 0)) {
+
+            // Both endpoints inside
+            accept = 1;
+            break;
+
+        } else if (code1 & code2) {
+
+            // Both endpoints share an outside region
+            break;
+
+        } else {
+
+            int code_out;
+
+            if (code1 != 0)
+                code_out = code1;
+            else
+                code_out = code2;
+
+            // Find intersection
+            if (code_out & TOP) {
+
+                x = x1 + (x2 - x1) * (ymax - y1) / (y2 - y1);
+                y = ymax;
+
+            } else if (code_out & BOTTOM) {
+
+                x = x1 + (x2 - x1) * (ymin - y1) / (y2 - y1);
+                y = ymin;
+
+            } else if (code_out & RIGHT) {
+
+                y = y1 + (y2 - y1) * (xmax - x1) / (x2 - x1);
+                x = xmax;
+
+            } else if (code_out & LEFT) {
+
+                y = y1 + (y2 - y1) * (xmin - x1) / (x2 - x1);
+                x = xmin;
+            }
+
+            // Replace outside point
+            if (code_out == code1) {
+
+                x1 = x;
+                y1 = y;
+                code1 = computeCode(x1, y1);
+
+            } else {
+
+                x2 = x;
+                y2 = y;
+                code2 = computeCode(x2, y2);
+            }
+        }
+    }
+
+    // Draw clipped line if accepted
+    if (accept) {
+
+        glColor3f(0.0, 1.0, 0.0); // Green
+
+        glBegin(GL_LINES);
+
+        glVertex2f(x1, y1);
+        glVertex2f(x2, y2);
+
+        glEnd();
+    }
+}
+
+// Display function
+void display() {
+
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Draw clipping window
+    glColor3f(1.0, 1.0, 1.0); // White
+
+    glBegin(GL_LINE_LOOP);
+
+    glVertex2f(xmin, ymin);
+    glVertex2f(xmax, ymin);
+    glVertex2f(xmax, ymax);
+    glVertex2f(xmin, ymax);
+
+    glEnd();
+
+    // Draw original line (Red)
+    glColor3f(1.0, 0.0, 0.0);
+
+    glBegin(GL_LINES);
+
+    glVertex2f(50, 50);
+    glVertex2f(350, 350);
+
+    glEnd();
+
+    // Apply clipping
+    cohenSutherlandClip();
+
+    glFlush();
+}
+
+// Initialization
+void init() {
+
+    glClearColor(0.0, 0.0, 0.0, 1.0);
+
+    gluOrtho2D(0, 400, 0, 400);
+}
+
+// Main function
+int main(int argc, char** argv) {
+
+    glutInit(&argc, argv);
+
+    glutInitWindowSize(500, 500);
+    glutInitWindowPosition(100, 100);
+
+    glutCreateWindow("Cohen-Sutherland Line Clipping");
+
+    init();
+
+    glutDisplayFunc(display);
+
+    glutMainLoop();
+
+    return 0;
+}
+      
+      `
+    },
+    {
+      id: 11.11,
+      question: "11. Sutherland-Hodgman Polygon Clipping",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <stdio.h>
+
+#define MAX 20
+
+// Clipping window
+float xmin = 100, ymin = 100, xmax = 300, ymax = 300;
+
+// Polygon points
+float poly_x[MAX] = {50, 350, 350, 50};
+float poly_y[MAX] = {50, 50, 350, 350};
+
+int n = 4;
+
+// Output polygon
+float out_x[MAX], out_y[MAX];
+int out_count;
+
+// Function to check inside
+int inside(float x, float y, int edge) {
+
+    switch(edge) {
+
+        case 0:
+            return (x >= xmin); // Left
+
+        case 1:
+            return (x <= xmax); // Right
+
+        case 2:
+            return (y >= ymin); // Bottom
+
+        case 3:
+            return (y <= ymax); // Top
+    }
+
+    return 0;
+}
+
+// Intersection calculation
+void intersect(float x1, float y1,
+               float x2, float y2,
+               int edge,
+               float *x, float *y) {
+
+    float m = (y2 - y1) / (x2 - x1);
+
+    if (edge == 0) {
+
+        // Left
+        *x = xmin;
+        *y = y1 + m * (xmin - x1);
+
+    } else if (edge == 1) {
+
+        // Right
+        *x = xmax;
+        *y = y1 + m * (xmax - x1);
+
+    } else if (edge == 2) {
+
+        // Bottom
+        *y = ymin;
+        *x = x1 + (ymin - y1) / m;
+
+    } else if (edge == 3) {
+
+        // Top
+        *y = ymax;
+        *x = x1 + (ymax - y1) / m;
+    }
+}
+
+// Clip against one edge
+void clipEdge(float in_x[],
+              float in_y[],
+              int in_count,
+              int edge) {
+
+    out_count = 0;
+
+    for (int i = 0; i < in_count; i++) {
+
+        int next = (i + 1) % in_count;
+
+        float x1 = in_x[i];
+        float y1 = in_y[i];
+
+        float x2 = in_x[next];
+        float y2 = in_y[next];
+
+        int in1 = inside(x1, y1, edge);
+        int in2 = inside(x2, y2, edge);
+
+        float x, y;
+
+        if (in1 && in2) {
+
+            // Case 1: both inside
+            out_x[out_count] = x2;
+            out_y[out_count++] = y2;
+
+        } else if (in1 && !in2) {
+
+            // Case 2: leaving
+            intersect(x1, y1, x2, y2, edge, &x, &y);
+
+            out_x[out_count] = x;
+            out_y[out_count++] = y;
+
+        } else if (!in1 && in2) {
+
+            // Case 3: entering
+            intersect(x1, y1, x2, y2, edge, &x, &y);
+
+            out_x[out_count] = x;
+            out_y[out_count++] = y;
+
+            out_x[out_count] = x2;
+            out_y[out_count++] = y2;
+        }
+
+        // Case 4: both outside → ignore
+    }
+}
+
+// Sutherland-Hodgman algorithm
+void sutherlandHodgman() {
+
+    float in_x[MAX], in_y[MAX];
+
+    int in_count = n;
+
+    // Copy original polygon
+    for (int i = 0; i < n; i++) {
+
+        in_x[i] = poly_x[i];
+        in_y[i] = poly_y[i];
+    }
+
+    // Clip against all 4 edges
+    for (int edge = 0; edge < 4; edge++) {
+
+        clipEdge(in_x, in_y, in_count, edge);
+
+        // Copy output → input for next edge
+        for (int i = 0; i < out_count; i++) {
+
+            in_x[i] = out_x[i];
+            in_y[i] = out_y[i];
+        }
+
+        in_count = out_count;
+    }
+
+    // Draw clipped polygon
+    glColor3f(0.0, 1.0, 0.0); // Green
+
+    glBegin(GL_POLYGON);
+
+    for (int i = 0; i < in_count; i++) {
+
+        glVertex2f(in_x[i], in_y[i]);
+    }
+
+    glEnd();
+}
+
+// Display
+void display() {
+
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Draw clipping window
+    glColor3f(1, 1, 1);
+
+    glBegin(GL_LINE_LOOP);
+
+    glVertex2f(xmin, ymin);
+    glVertex2f(xmax, ymin);
+    glVertex2f(xmax, ymax);
+    glVertex2f(xmin, ymax);
+
+    glEnd();
+
+    // Draw original polygon (Red)
+    glColor3f(1, 0, 0);
+
+    glBegin(GL_POLYGON);
+
+    for (int i = 0; i < n; i++) {
+
+        glVertex2f(poly_x[i], poly_y[i]);
+    }
+
+    glEnd();
+
+    // Clip and draw result
+    sutherlandHodgman();
+
+    glFlush();
+}
+
+// Init
+void init() {
+
+    glClearColor(0, 0, 0, 1);
+
+    gluOrtho2D(0, 400, 0, 400);
+}
+
+// Main
+int main(int argc, char** argv) {
+
+    glutInit(&argc, argv);
+
+    glutInitWindowSize(500, 500);
+
+    glutCreateWindow("Sutherland-Hodgman Polygon Clipping");
+
+    init();
+
+    glutDisplayFunc(display);
+
+    glutMainLoop();
+
+    return 0;
+}
+      `
+    },
+    {
+      id: 12,
+      question: "12. 3D Object Transformation",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <stdlib.h>
+
+float tx=0,ty=0,tz=0,sx=1,sy=1,sz=1,angle=0;
+int mode=0;
+
+// Axes
+void axes(){
+    glBegin(GL_LINES);
+
+    glColor3f(1,0,0);
+    glVertex3f(0,0,0);
+    glVertex3f(3,0,0);
+
+    glColor3f(0,1,0);
+    glVertex3f(0,0,0);
+    glVertex3f(0,3,0);
+
+    glColor3f(0,0,1);
+    glVertex3f(0,0,0);
+    glVertex3f(0,0,3);
+
+    glEnd();
+}
+
+// Shear & Reflection
+void shear(){
+    GLfloat m[]={
+        1,0.5,0,0,
+        0.5,1,0,0,
+        0,0,1,0,
+        0,0,0,1
+    };
+
+    glMultMatrixf(m);
+}
+
+void reflect(){
+    GLfloat m[]={
+        -1,0,0,0,
+         0,1,0,0,
+         0,0,1,0,
+         0,0,0,1
+    };
+
+    glMultMatrixf(m);
+}
+
+// Display
+void display(){
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glLoadIdentity();
+
+    gluLookAt(4,4,6,0,0,0,0,1,0);
+
+    axes();
+
+    // Original cube
+    glPushMatrix();
+
+    glTranslatef(1.5,0,0);
+
+    glColor3f(0,1,0);
+
+    glutWireCube(1);
+
+    glPopMatrix();
+
+    glPushMatrix();
+
+    if(mode==4){
+
+        reflect();
+
+        glTranslatef(1.5,0,0);
+
+        glColor3f(1,0,0);
+
+    } else {
+
+        glTranslatef(1.5,0,0);
+
+        if(mode==1)
+            glTranslatef(tx,ty,tz);
+
+        else if(mode==2)
+            glScalef(sx,sy,sz);
+
+        else if(mode==3)
+            glRotatef(angle,1,1,1);
+
+        else if(mode==5)
+            shear();
+
+        glColor3f(1,1,1);
+    }
+
+    glutWireCube(1);
+
+    glPopMatrix();
+
+    glutSwapBuffers();
+}
+
+// Keyboard
+void key(unsigned char k,int x,int y){
+
+    if(k=='t'){
+        mode=1;
+        tx+=0.3;
+    }
+
+    else if(k=='s'){
+        mode=2;
+        sx+=0.2;
+        sy+=0.2;
+        sz+=0.2;
+    }
+
+    else if(k=='r'){
+        mode=3;
+        angle+=10;
+    }
+
+    else if(k=='f')
+        mode=4;
+
+    else if(k=='h')
+        mode=5;
+
+    else if(k=='c'){
+        tx=ty=tz=0;
+        sx=sy=sz=1;
+        angle=0;
+        mode=0;
+    }
+
+    else if(k==27)
+        exit(0);
+
+    glutPostRedisplay();
+}
+
+// Init & reshape
+void init(){
+    glEnable(GL_DEPTH_TEST);
+    glClearColor(0,0,0,1);
+}
+
+void reshape(int w,int h){
+
+    glViewport(0,0,w,h);
+
+    glMatrixMode(GL_PROJECTION);
+
+    glLoadIdentity();
+
+    gluPerspective(60,(float)w/h,1,100);
+
+    glMatrixMode(GL_MODELVIEW);
+}
+
+int main(int argc,char** argv){
+
+    glutInit(&argc,argv);
+
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+
+    glutInitWindowSize(800,600);
+
+    glutCreateWindow("3D Transform");
+
+    init();
+
+    glutDisplayFunc(display);
+
+    glutReshapeFunc(reshape);
+
+    glutKeyboardFunc(key);
+
+    glutMainLoop();
+}
+      
+      `
+    },
+    {
+      id: 13.13,
+      question: "13. Scanline Hidden Surface Removal",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <float.h>
+
+#define W 500
+#define H 500
+
+float zbuf[W][H];
+
+// Near (green)
+float t1[3][3] = {
+    {150,350,0.2},
+    {100,150,0.2},
+    {300,150,0.2}
+};
+
+// Far (red)
+float t2[3][3] = {
+    {200,300,0.8},
+    {150,100,0.8},
+    {350,100,0.8}
+};
+
+// Z-buffer init
+void initZ() {
+
+    for(int i=0;i<W;i++)
+        for(int j=0;j<H;j++)
+            zbuf[i][j]=FLT_MAX;
+}
+
+// Plot pixel with depth
+void pixel(int x,int y,float z) {
+
+    if(x>=0&&x<W&&y>=0&&y<H && z<zbuf[x][y]) {
+
+        zbuf[x][y]=z;
+
+        glVertex2i(x,y);
+    }
+}
+
+// Back-face culling
+int visible(float v[3][3]) {
+
+    float dx1=v[1][0]-v[0][0];
+    float dy1=v[1][1]-v[0][1];
+
+    float dx2=v[2][0]-v[0][0];
+    float dy2=v[2][1]-v[0][1];
+
+    return (dx1*dy2 - dy1*dx2) > 0;
+}
+
+// Scan-line fill
+void fill(float v[3][3]) {
+
+    int ymin=v[0][1], ymax=v[0][1];
+
+    for(int i=1;i<3;i++){
+
+        if(v[i][1]<ymin)
+            ymin=v[i][1];
+
+        if(v[i][1]>ymax)
+            ymax=v[i][1];
+    }
+
+    for(int y=ymin;y<=ymax;y++){
+
+        int x1=W,x2=0;
+
+        for(int i=0;i<3;i++){
+
+            int j=(i+1)%3;
+
+            float xA=v[i][0],yA=v[i][1];
+            float xB=v[j][0],yB=v[j][1];
+
+            if((yA<=y&&yB>y)||(yB<=y&&yA>y)){
+
+                int x=xA+(y-yA)*(xB-xA)/(yB-yA);
+
+                if(x<x1) x1=x;
+                if(x>x2) x2=x;
+            }
+        }
+
+        for(int x=x1;x<=x2;x++)
+            pixel(x,y,v[0][2]);
+    }
+}
+
+// Display
+void display() {
+
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    initZ();
+
+    glBegin(GL_POINTS);
+
+    if(visible(t2)) {
+        glColor3f(1,0,0);
+        fill(t2);
+    }
+
+    if(visible(t1)) {
+        glColor3f(0,1,0);
+        fill(t1);
+    }
+
+    glEnd();
+
+    glFlush();
+}
+
+// Init
+void init() {
+
+    glClearColor(0,0,0,1);
+
+    gluOrtho2D(0,W,0,H);
+}
+
+int main(int argc,char** argv) {
+
+    glutInit(&argc,argv);
+
+    glutInitWindowSize(W,H);
+
+    glutCreateWindow("Hidden Surface");
+
+    init();
+
+    glutDisplayFunc(display);
+
+    glutMainLoop();
+}
+      
+      `
+    },
+    {
+      id: 14.14,
+      question: "14. RGB HSV Color & Anti Aliasing",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+#include <math.h>
+
+// HSV → RGB
+void hsv(float h,float s,float v,float *r,float *g,float *b){
+
+    int i=h/60;
+
+    float f=h/60-i;
+
+    float p=v*(1-s),
+          q=v*(1-s*f),
+          t=v*(1-s*(1-f));
+
+    switch(i%6){
+
+        case 0:
+            *r=v; *g=t; *b=p;
+            break;
+
+        case 1:
+            *r=q; *g=v; *b=p;
+            break;
+
+        case 2:
+            *r=p; *g=v; *b=t;
+            break;
+
+        case 3:
+            *r=p; *g=q; *b=v;
+            break;
+
+        case 4:
+            *r=t; *g=p; *b=v;
+            break;
+
+        case 5:
+            *r=v; *g=p; *b=q;
+            break;
+    }
+}
+
+// Draw square
+void square(int x1,int y1,int x2,int y2){
+
+    glBegin(GL_QUADS);
+
+    glVertex2f(x1,y1);
+    glVertex2f(x2,y1);
+    glVertex2f(x2,y2);
+    glVertex2f(x1,y2);
+
+    glEnd();
+}
+
+void display(){
+
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // RGB squares
+    glColor3f(1,0,0);
+    square(50,300,150,200);
+
+    glColor3f(0,1,0);
+    square(200,300,300,200);
+
+    glColor3f(0,0,1);
+    square(350,300,450,200);
+
+    // HSV triangle
+    float r,g,b;
+
+    hsv(120,1,1,&r,&g,&b);
+
+    glColor3f(r,g,b);
+
+    glBegin(GL_TRIANGLES);
+
+    glVertex2f(150,100);
+    glVertex2f(300,100);
+    glVertex2f(225,200);
+
+    glEnd();
+
+    // Anti-aliasing line
+    glEnable(GL_BLEND);
+
+    glEnable(GL_LINE_SMOOTH);
+
+    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
+    glLineWidth(3);
+
+    glColor3f(1,1,1);
+
+    glBegin(GL_LINES);
+
+    glVertex2f(50,50);
+    glVertex2f(450,50);
+
+    glEnd();
+
+    glFlush();
+}
+
+int main(int argc,char** argv){
+
+    glutInit(&argc,argv);
+
+    glutInitWindowSize(500,400);
+
+    glutCreateWindow("RGB HSV AA");
+
+    glClearColor(0,0,0,1);
+
+    gluOrtho2D(0,500,0,400);
+
+    glutDisplayFunc(display);
+
+    glutMainLoop();
+}
+      `
+    },
+    {
+      id: 14.14,
+      question: "14. Shading and Texture in 3D Object",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+
+float angle=0;
+
+GLuint tex;
+
+// Simple checker texture
+void texture(){
+
+    unsigned char img[8][8][3];
+
+    for(int i=0;i<8;i++)
+        for(int j=0;j<8;j++){
+
+            int c=((i+j)%2)*255;
+
+            img[i][j][0]=img[i][j][1]=img[i][j][2]=c;
+        }
+
+    glGenTextures(1,&tex);
+
+    glBindTexture(GL_TEXTURE_2D,tex);
+
+    glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,
+                 8,8,0,
+                 GL_RGB,
+                 GL_UNSIGNED_BYTE,
+                 img);
+
+    glTexParameteri(GL_TEXTURE_2D,
+                    GL_TEXTURE_MIN_FILTER,
+                    GL_LINEAR);
+}
+
+// Lighting
+void light(){
+
+    GLfloat pos[]={2,2,2,1};
+
+    glLightfv(GL_LIGHT0,GL_POSITION,pos);
+
+    glEnable(GL_LIGHTING);
+
+    glEnable(GL_LIGHT0);
+}
+
+// Cube
+void cube(){
+
+    glEnable(GL_TEXTURE_2D);
+
+    glBindTexture(GL_TEXTURE_2D,tex);
+
+    glBegin(GL_QUADS);
+
+    glNormal3f(0,0,1);
+
+    glTexCoord2f(0,0);
+    glVertex3f(-1,-1,1);
+
+    glTexCoord2f(1,0);
+    glVertex3f(1,-1,1);
+
+    glTexCoord2f(1,1);
+    glVertex3f(1,1,1);
+
+    glTexCoord2f(0,1);
+    glVertex3f(-1,1,1);
+
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+}
+
+// Display
+void display(){
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glLoadIdentity();
+
+    gluLookAt(4,4,6,0,0,0,0,1,0);
+
+    glRotatef(angle,1,1,0);
+
+    cube();
+
+    glutSwapBuffers();
+}
+
+// Keyboard
+void key(unsigned char k,int x,int y){
+
+    if(k=='r')
+        angle+=10;
+
+    if(k==27)
+        exit(0);
+
+    glutPostRedisplay();
+}
+
+// Init
+void init(){
+
+    glEnable(GL_DEPTH_TEST);
+
+    glClearColor(0,0,0,1);
+
+    light();
+
+    texture();
+}
+
+// Reshape
+void reshape(int w,int h){
+
+    glViewport(0,0,w,h);
+
+    glMatrixMode(GL_PROJECTION);
+
+    glLoadIdentity();
+
+    gluPerspective(60,(float)w/h,1,100);
+
+    glMatrixMode(GL_MODELVIEW);
+}
+
+int main(int argc,char** argv){
+
+    glutInit(&argc,argv);
+
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+
+    glutInitWindowSize(600,500);
+
+    glutCreateWindow("Shading + Texture");
+
+    init();
+
+    glutDisplayFunc(display);
+
+    glutReshapeFunc(reshape);
+
+    glutKeyboardFunc(key);
+
+    glutMainLoop();
+}
+      `
+    },
+    {
+      id: 16.16,
+      question: "16. Animation Using Transformation Function",
+      answer: "",
+      codeExample: `
+#include <GL/glut.h>
+
+float carX = -5;
+float sunAngle = 0;
+
+// DRAW SUN
+void sun(){
+
+    glPushMatrix();
+
+    glTranslatef(3,3,0);
+
+    glRotatef(sunAngle,0,0,1);
+
+    glColor3f(1,1,0);
+
+    glutSolidSphere(0.5,20,20);
+
+    glPopMatrix();
+}
+
+// DRAW CAR
+void car(){
+
+    glPushMatrix();
+
+    glTranslatef(carX,-2,0);
+
+    // body
+    glColor3f(0,0,1);
+
+    glBegin(GL_QUADS);
+
+    glVertex2f(-1,0);
+    glVertex2f(1,0);
+    glVertex2f(1,1);
+    glVertex2f(-1,1);
+
+    glEnd();
+
+    // wheels
+    glColor3f(0,0,0);
+
+    glPushMatrix();
+
+    glTranslatef(-0.7,-0.2,0);
+
+    glutSolidSphere(0.3,20,20);
+
+    glPopMatrix();
+
+    glPushMatrix();
+
+    glTranslatef(0.7,-0.2,0);
+
+    glutSolidSphere(0.3,20,20);
+
+    glPopMatrix();
+
+    glPopMatrix();
+}
+
+// DRAW TREE
+void tree(){
+
+    glColor3f(0.5,0.3,0);
+
+    glBegin(GL_QUADS);
+
+    glVertex2f(-4,-2);
+    glVertex2f(-3.8,-2);
+    glVertex2f(-3.8,0);
+    glVertex2f(-4,0);
+
+    glEnd();
+
+    glColor3f(0,1,0);
+
+    glBegin(GL_TRIANGLES);
+
+    glVertex2f(-4.5,0);
+    glVertex2f(-3.3,0);
+    glVertex2f(-3.9,1);
+
+    glEnd();
+}
+
+// DISPLAY
+void display(){
+
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    sun();
+
+    tree();
+
+    car();
+
+    glutSwapBuffers();
+}
+
+// ANIMATION
+void update(int v){
+
+    carX += 0.05;
+
+    if(carX > 5)
+        carX = -5;
+
+    sunAngle += 2;
+
+    glutPostRedisplay();
+
+    glutTimerFunc(30, update, 0);
+}
+
+// INIT
+void init(){
+
+    glClearColor(0.5,0.8,1,1);
+
+    gluOrtho2D(-5,5,-5,5);
+}
+
+// MAIN
+int main(int argc,char** argv){
+
+    glutInit(&argc,argv);
+
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+
+    glutInitWindowSize(600,600);
+
+    glutCreateWindow("Simple Animation");
+
+    init();
+
+    glutDisplayFunc(display);
+
+    glutTimerFunc(0, update, 0);
+
+    glutMainLoop();
+}
+      
+      `
+    },
+    {
       id: 1,
       question: "1. ",
       answer: "",
@@ -7721,6 +8915,74 @@ int main(int argc, char** argv)
       answer: "",
       codeExample: ``
     },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+
+    
 
   ];
 
